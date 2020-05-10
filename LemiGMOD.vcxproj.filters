@@ -13,21 +13,153 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков\CORE">
+      <UniqueIdentifier>{2b0ad5c4-a4a6-4d9a-8aec-e8de3c516740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\CORE">
+      <UniqueIdentifier>{3202b823-bae7-4d4b-a04d-8105b1d8b6e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\CORE\HOOKS">
+      <UniqueIdentifier>{d3723990-0a43-47a5-a33f-4d95cbb3917d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\CORE\HOOKS">
+      <UniqueIdentifier>{37dd6d0c-0005-45cd-a676-6df91233311c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\minhook">
+      <UniqueIdentifier>{73bd8e9f-afe9-4cb2-9ef2-be3e4a6a4c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\Custom">
+      <UniqueIdentifier>{93a0adb5-940b-4fba-ac7e-0aa28281e1d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\CORE\INTERFACES">
+      <UniqueIdentifier>{f6d352a7-decb-4e67-9f52-62949663e788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\CORE\INTERFACES">
+      <UniqueIdentifier>{176a3eee-177d-40ad-96a9-b3f2fc390e6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\Math">
+      <UniqueIdentifier>{b3e688d2-0ab8-49ea-a2e0-0eb462436de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\CORE\TOOLS">
+      <UniqueIdentifier>{0772acc3-e5f5-4827-9a4a-7dc65b8f3414}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\CORE\TOOLS">
+      <UniqueIdentifier>{473969d4-ee02-4b30-a874-8d6bf777d54f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\CORE\CLASES">
+      <UniqueIdentifier>{489bc7eb-1262-42e1-b1f4-6cfa6da4c04f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\CORE\CLASES">
+      <UniqueIdentifier>{68879030-525d-4e95-9d2d-4bf4b6a7be1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\CORE\lua">
+      <UniqueIdentifier>{14077082-7ee3-4749-ab29-8ba0d407e473}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="Singleton.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="HackCore.h">
+      <Filter>Файлы заголовков\CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="HooksManager.h">
+      <Filter>Файлы заголовков\CORE\HOOKS</Filter>
+    </ClInclude>
+    <ClInclude Include="minhook\MinHook.h">
+      <Filter>Файлы ресурсов\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleColor.h">
+      <Filter>Файлы ресурсов\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="vector.h">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="vector2d.h">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="vector4d.h">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex.h">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="VMatrix.h">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MemTools.h">
+      <Filter>Файлы заголовков\CORE\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="IVEngineClient.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="iinclude.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="QAngle.h">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="IBaseClientDll.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="CClientClass.h">
+      <Filter>Файлы заголовков\CORE\CLASES</Filter>
+    </ClInclude>
+    <ClInclude Include="RecvProps.h">
+      <Filter>Файлы заголовков\CORE\CLASES</Filter>
+    </ClInclude>
+    <ClInclude Include="IVClientEntityList.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="LUA.h">
+      <Filter>Файлы заголовков\CORE\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="ISurface.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="color.h">
+      <Filter>Файлы ресурсов\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="IInputSystem.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="IClientMode.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="HackCore.cpp">
+      <Filter>Исходные файлы\CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="HooksManager.cpp">
+      <Filter>Исходные файлы\CORE\HOOKS</Filter>
+    </ClCompile>
+    <ClCompile Include="Interfaces.cpp">
+      <Filter>Исходные файлы\CORE\INTERFACES</Filter>
+    </ClCompile>
+    <ClCompile Include="vector.cpp">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="vector2d.cpp">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="vector4d.cpp">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="VMatrix.cpp">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="MemTools.cpp">
+      <Filter>Исходные файлы\CORE\TOOLS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

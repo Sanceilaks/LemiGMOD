@@ -1,11 +1,12 @@
-﻿// dllmain.cpp : Определяет точку входа для приложения DLL.
-#include "framework.h"
+﻿#include "framework.h"
+#include "Interfaces.h"
 
 void HackStart(void* dll)
 {
     HackCore::Get().Init();
 
 
+    //std::cout << Interfaces::Get().Engine->isInGame() << "\n";
 }
 
 
