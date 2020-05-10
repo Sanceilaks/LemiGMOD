@@ -16,7 +16,7 @@ bool Interfaces::Init()
 	do {
 		this->ClientMode = **(IClientMode***)((*(uintptr_t**)this->BaseClient)[10] + 0x5);
 	} while (!this->ClientMode);
-	this->DirectX = **(IDirect3DDevice9***)(CMemTools::PatternScaner("shaderapidx9.dll", "A1 ? ? ? ? 50 8B 08 FF 51 0C"));
+	this->DirectX = **(IDirect3DDevice9***)(CMemTools::PatternScaner("shaderapidx9.dll", "A1 ? ? ? ? 50 8B 08 FF 51 0C") + 1);
 
 
 

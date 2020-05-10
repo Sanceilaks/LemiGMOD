@@ -1,5 +1,8 @@
 #pragma once
-//#include "imgui/imgui.h"
+#include "imgui/imgui.h"
+#pragma warning( push )
+#pragma warning( disable : 4244) //4244
+
 
 class CColor
 {
@@ -17,12 +20,9 @@ class CColor
 		{
 			SetColor(_r, _g, _b, _a);
 		}
-		CColor(float* col_arr)
+		CColor(float col_arr[3])
 		{
-			if (sizeof(col_arr) > 3)
-				SetColor(col_arr[0], col_arr[1], col_arr[2], col_arr[3]);
-			else
-				SetColor(col_arr[0], col_arr[1], col_arr[2]);
+			SetColor(col_arr[0] * 255, col_arr[1] * 255, col_arr[2] * 255);
 		}
 
 		// set the color
@@ -50,12 +50,12 @@ class CColor
 			*((int*)this) = color32;
 		}
 
-		//ImU32 GetU32()
-		//{
-		//	return ((_color[3] & 0xff) << 24) + ((_color[2] & 0xff) << 16) + ((_color[1] & 0xff) << 8)
-		//		+ (_color[0] & 0xff);
-		//	//return (ImU32)(((_color[3] & 0xff) << 24) + ((_color[0] & 0xff) << 16) + ((_color[1] & 0xff) << 8) + (_color[2] & 0xff));
-		//}
+		ImU32 GetU32()
+		{
+			return ((_color[3] & 0xff) << 24) + ((_color[2] & 0xff) << 16) + ((_color[1] & 0xff) << 8)
+				+ (_color[0] & 0xff);
+			//return (ImU32)(((_color[3] & 0xff) << 24) + ((_color[0] & 0xff) << 16) + ((_color[1] & 0xff) << 8) + (_color[2] & 0xff));
+		}
 
 		int GetRawColor() const
 		{
@@ -97,3 +97,5 @@ class CColor
 	public:
 		unsigned char _color[4];
 };
+
+#pragma warning( pop )

@@ -55,6 +55,21 @@
     <Filter Include="Файлы заголовков\CORE\lua">
       <UniqueIdentifier>{14077082-7ee3-4749-ab29-8ba0d407e473}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы ресурсов\imgui">
+      <UniqueIdentifier>{a61dcf76-e92b-41bf-9c4f-dffc3901df11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\MENU">
+      <UniqueIdentifier>{f48159e2-18d1-43ad-8935-c52753ee585f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\HACKS">
+      <UniqueIdentifier>{108b547a-63b8-4758-a57a-78caa93d9d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\HACKS">
+      <UniqueIdentifier>{69f87e08-8a6d-4fc6-b413-07d081342bf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\DRAW">
+      <UniqueIdentifier>{bcb2064e-18a6-4f1e-bdbc-a52873d57eec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -132,6 +147,90 @@
     <ClInclude Include="IClientMode.h">
       <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
     </ClInclude>
+    <ClInclude Include="CUserCmd.h">
+      <Filter>Файлы заголовков\CORE\CLASES</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateMoveHook.h">
+      <Filter>Файлы заголовков\CORE\HOOKS</Filter>
+    </ClInclude>
+    <ClInclude Include="hi.h">
+      <Filter>Файлы заголовков\CORE\HOOKS</Filter>
+    </ClInclude>
+    <ClInclude Include="EndScaneHook.h">
+      <Filter>Файлы заголовков\CORE\HOOKS</Filter>
+    </ClInclude>
+    <ClInclude Include="ResetHook.h">
+      <Filter>Файлы заголовков\CORE\HOOKS</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>Файлы ресурсов\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>Файлы ресурсов\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_dx9.h">
+      <Filter>Файлы ресурсов\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>Файлы ресурсов\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_rect_pack.h">
+      <Filter>Файлы ресурсов\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_textedit.h">
+      <Filter>Файлы ресурсов\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_truetype.h">
+      <Filter>Файлы ресурсов\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>Файлы заголовков\CORE\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="menu.h">
+      <Filter>Файлы ресурсов\MENU</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuThemes.h">
+      <Filter>Файлы ресурсов\MENU</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomUIModules.h">
+      <Filter>Файлы ресурсов\MENU</Filter>
+    </ClInclude>
+    <ClInclude Include="GLOBALS.h">
+      <Filter>Файлы заголовков\CORE</Filter>
+    </ClInclude>
+    <ClInclude Include="CBaseEntity.h">
+      <Filter>Файлы заголовков\CORE\CLASES</Filter>
+    </ClInclude>
+    <ClInclude Include="Netvars.h">
+      <Filter>Файлы заголовков\CORE\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="fnv.h">
+      <Filter>Файлы заголовков\CORE\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="BasePlayer.h">
+      <Filter>Файлы заголовков\CORE\CLASES</Filter>
+    </ClInclude>
+    <ClInclude Include="BannyHop.h">
+      <Filter>Файлы заголовков\HACKS</Filter>
+    </ClInclude>
+    <ClInclude Include="ESPBox.h">
+      <Filter>Файлы заголовков\HACKS</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTools.h">
+      <Filter>Файлы заголовков\CORE\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiBaseDraw.h">
+      <Filter>Файлы ресурсов\DRAW</Filter>
+    </ClInclude>
+    <ClInclude Include="LockCursorHook.h">
+      <Filter>Файлы заголовков\CORE\HOOKS</Filter>
+    </ClInclude>
+    <ClInclude Include="AimBot.h">
+      <Filter>Файлы заголовков\HACKS</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>Файлы ресурсов\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -160,6 +259,42 @@
     </ClCompile>
     <ClCompile Include="MemTools.cpp">
       <Filter>Исходные файлы\CORE\TOOLS</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateMoveHook.cpp">
+      <Filter>Исходные файлы\CORE\HOOKS</Filter>
+    </ClCompile>
+    <ClCompile Include="EndScaneHook.cpp">
+      <Filter>Исходные файлы\CORE\HOOKS</Filter>
+    </ClCompile>
+    <ClCompile Include="ResetHook.cpp">
+      <Filter>Исходные файлы\CORE\HOOKS</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>Файлы ресурсов\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>Файлы ресурсов\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_dx9.cpp">
+      <Filter>Файлы ресурсов\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="GLOBALS.cpp">
+      <Filter>Исходные файлы\CORE</Filter>
+    </ClCompile>
+    <ClCompile Include="Netvars.cpp">
+      <Filter>Исходные файлы\CORE\TOOLS</Filter>
+    </ClCompile>
+    <ClCompile Include="BannyHop.cpp">
+      <Filter>Исходные файлы\HACKS</Filter>
+    </ClCompile>
+    <ClCompile Include="ESPBox.cpp">
+      <Filter>Исходные файлы\HACKS</Filter>
+    </ClCompile>
+    <ClCompile Include="LockCursorHook.cpp">
+      <Filter>Исходные файлы\CORE\HOOKS</Filter>
+    </ClCompile>
+    <ClCompile Include="AimBot.cpp">
+      <Filter>Исходные файлы\HACKS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

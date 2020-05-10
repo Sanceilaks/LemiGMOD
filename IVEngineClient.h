@@ -2,6 +2,10 @@
 #include <cstdint>
 #include "QAngle.h"
 #include "VMatrix.h"
+#include "vector2d.h"
+
+#pragma warning( push )
+#pragma warning( disable : 4244) //4244
 
 struct player_info_t
 {
@@ -44,4 +48,40 @@ public:
 		using orig_fn = bool(__thiscall*)(IVEngineClient*);
 		return(*(orig_fn**)this)[26](this);					//26
 	}
+
+	bool GetPlayerInfo(int index, player_info_t* info)
+	{
+		using orig_fn = bool(__thiscall*)(IVEngineClient*, int, player_info_t*);
+		return(*(orig_fn**)this)[8](this, index, info);
+	}
+
+	const Math::VMatrix& GetViewMatrix()
+	{
+		using orig_fn = const Math::VMatrix&(__thiscall*)(IVEngineClient*);
+		return(*(orig_fn**)this)[36](this);
+	}
+
+	void GetScreenSize(int& width, int& height) {
+		using original_fn = void(__thiscall*)(IVEngineClient*, int&, int&);
+		return (*(original_fn**)this)[5](this, width, height);
+	}
+	
+	Math::CVector2D GetScreenSize()
+	{
+		int w, h;
+		this->GetScreenSize(w, h);
+		return Math::CVector2D(w, h);
+	}
+
+	void SetViewAngles(Math::QAngle& Angle)
+	{
+		using original_fn = void(__thiscall*)(IVEngineClient*, Math::CVector&);
+		return (*(original_fn**)this)[20](this, Angle);
+	}
+	int GetMaxClients()
+	{
+		using orig_fn = int(__thiscall*)(IVEngineClient*);
+		return(*(orig_fn**)this)[21](this);
+	}
 };
+#pragma warning( pop )

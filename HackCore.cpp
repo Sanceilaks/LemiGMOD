@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <iostream>
 #include "Interfaces.h"
+#include "HooksManager.h"
 
 bool HackCore::Unload(void* dll)
 {
@@ -20,8 +21,10 @@ bool HackCore::Init()
 
 	if (!Interfaces::Get().Init())
 		printf("Interfaces load error!\n");
-
 	Interfaces::Get().Parse();
+
+	if (!HookManager::Get().Init())
+		printf("POCHINI!!!!\n");
 
 	return false;
 }

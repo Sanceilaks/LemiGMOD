@@ -159,10 +159,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AimBot.h" />
+    <ClInclude Include="BannyHop.h" />
+    <ClInclude Include="BasePlayer.h" />
+    <ClInclude Include="CBaseEntity.h" />
     <ClInclude Include="CClientClass.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="CreateMoveHook.h" />
+    <ClInclude Include="CUserCmd.h" />
+    <ClInclude Include="CustomUIModules.h" />
+    <ClInclude Include="EndScaneHook.h" />
+    <ClInclude Include="ESPBox.h" />
+    <ClInclude Include="fnv.h" />
+    <ClInclude Include="GameTools.h" />
+    <ClInclude Include="GLOBALS.h" />
+    <ClInclude Include="hi.h" />
     <ClInclude Include="IClientMode.h" />
     <ClInclude Include="IInputSystem.h" />
+    <ClInclude Include="ImGuiBaseDraw.h" />
+    <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
+    <ClInclude Include="imgui\imgui_impl_dx9.h" />
+    <ClInclude Include="imgui\imgui_internal.h" />
+    <ClInclude Include="imgui\stb_rect_pack.h" />
+    <ClInclude Include="imgui\stb_textedit.h" />
+    <ClInclude Include="imgui\stb_truetype.h" />
     <ClInclude Include="ISurface.h" />
     <ClInclude Include="IVClientEntityList.h" />
     <ClInclude Include="ConsoleColor.h" />
@@ -173,11 +194,18 @@
     <ClInclude Include="iinclude.h" />
     <ClInclude Include="Interfaces.h" />
     <ClInclude Include="IVEngineClient.h" />
+    <ClInclude Include="LockCursorHook.h" />
     <ClInclude Include="LUA.h" />
+    <ClInclude Include="math.h" />
     <ClInclude Include="MemTools.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="MenuThemes.h" />
     <ClInclude Include="minhook\MinHook.h" />
+    <ClInclude Include="Netvars.h" />
     <ClInclude Include="QAngle.h" />
     <ClInclude Include="RecvProps.h" />
+    <ClInclude Include="ResetHook.h" />
+    <ClInclude Include="Settings.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="vector2d.h" />
@@ -186,11 +214,23 @@
     <ClInclude Include="VMatrix.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AimBot.cpp" />
+    <ClCompile Include="BannyHop.cpp" />
+    <ClCompile Include="CreateMoveHook.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="EndScaneHook.cpp" />
+    <ClCompile Include="ESPBox.cpp" />
+    <ClCompile Include="GLOBALS.cpp" />
     <ClCompile Include="HackCore.cpp" />
     <ClCompile Include="HooksManager.cpp" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_dx9.cpp" />
     <ClCompile Include="Interfaces.cpp" />
+    <ClCompile Include="LockCursorHook.cpp" />
     <ClCompile Include="MemTools.cpp" />
+    <ClCompile Include="Netvars.cpp" />
+    <ClCompile Include="ResetHook.cpp" />
     <ClCompile Include="vector.cpp" />
     <ClCompile Include="vector2d.cpp" />
     <ClCompile Include="vector4d.cpp" />

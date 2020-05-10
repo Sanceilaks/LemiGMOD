@@ -55,7 +55,7 @@ class ISurface
 public:			//Surface draw funcs == screen will grabbed
 	void UnlockCursor()
 	{
-		using orig_fn = void(__thiscall*)(ISurface*);
+		using orig_fn = void(__thiscall*)(ISurface*);										
 		return (*(orig_fn**)this)[61](this);
 	}
 
@@ -65,4 +65,9 @@ public:			//Surface draw funcs == screen will grabbed
 		return (*(orig_fn**)this)[62](this);
 	}
 
+	//void SetCursorAlwaysVisible(bool state)
+	//{
+	//	using orig_fn = void(__thiscall*)(ISurface*);		//49  52
+	//	return(*(orig_fn**)this)[57](this);
+	//}
 };
