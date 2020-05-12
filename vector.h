@@ -214,4 +214,32 @@ namespace Math
 
 		float w;
 	};
+	FORCEINLINE void VectorSubtract(const CVector& a, const CVector& b, CVector& c)
+	{
+		c.x = a.x - b.x;
+		c.y = a.y - b.y;
+		c.z = a.z - b.z;
+	}
+	FORCEINLINE void VectorAdd(const CVector& a, const CVector& b, CVector& c)
+	{
+		c.x = a.x + b.x;
+		c.y = a.y + b.y;
+		c.z = a.z + b.z;
+	}
+
+	struct cplane_t
+	{
+		Math::CVector normal;
+		float dist;
+		unsigned char type;			// for fast side tests
+		unsigned char signbits;		// signx + (signy<<1) + (signz<<1)
+		unsigned char pad[2];
+
+		cplane_t() {}
+
+	private:
+		// No copy constructors allowed if we're in optimal mode
+		cplane_t(const cplane_t& vOther);
+	};
+
 }

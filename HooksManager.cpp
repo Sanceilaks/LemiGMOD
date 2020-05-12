@@ -12,6 +12,8 @@ bool HookManager::Init()
 	auto EndScaneTarget	  = reinterpret_cast<void*>(get_virtual(Interfaces::Get().DirectX, 42));				    //In dx9 always 42
 	auto ResetTarget      = reinterpret_cast<void*>(get_virtual(Interfaces::Get().DirectX, 16));					//In dx9 always 16
 	auto LockCursorTarget = reinterpret_cast<void*>(get_virtual(Interfaces::Get().Surface, 62));					
+	auto RenderViewTarget = reinterpret_cast<void*>(get_virtual(Interfaces::Get().RenderView, 6));
+
 
 	if (MH_Initialize() != MH_OK)
 	{
@@ -43,6 +45,12 @@ bool HookManager::Init()
 		throw std::runtime_error("failed to initialize Reset (outdated index?)");
 		return false;
 	}
+
+	/*if (MH_CreateHook(RenderViewTarget, &Hooks::RenderViewFn::hook, reinterpret_cast<void**>(&this->RenderViewOriginal)) != MH_OK) {
+		printf("failed to initialize RenderView (outdated index?)\n");
+		throw std::runtime_error("failed to initialize Reset (outdated index?)");
+		return false;
+	}*/
 
 	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK) {
 		throw std::runtime_error("failed to enable hooks.");
@@ -82,4 +90,10 @@ void __stdcall Hooks::LockCursor::hook()
 {
 	if (!MyHooks::MyLockCursor())
 		HookManager::Get().LockCursorOriginal(Interfaces::Get().Surface);
+}
+
+void __stdcall Hooks::RenderViewFn::hook(CViewSetup& view, int nClearFlags, int whatToDraw)
+{
+	CViewSetup myview = MyHooks::RenderView(view, nClearFlags, whatToDraw);
+	HookManager::Get().RenderViewOriginal(Interfaces::Get().RenderView, myview, nClearFlags, whatToDraw);
 }

@@ -6,15 +6,30 @@
 #include "ImGuiBaseDraw.h"
 #include "color.h"
 
+#pragma warning( push )
+#pragma warning( disable : 4244) //4244
+
+
 void ESPBox::Render()
 {
 	if (!CoreSettings::Get().GetHackSettings()->ESP->IsActive)
 		return;
-
 	if (!Interfaces::Get().Engine->isInGame())
 		return;
 
-	ImDrawList* drawlist = ImGui::GetOverlayDrawList();
+	auto get_box = [](Math::CVector feet, Math::CVector head) -> RECT {
+		RECT ret;
+
+		auto h_ = fabs(head.y - feet.y);
+		auto w_ = h_ / 2.0f;
+
+		ret.left = (int)(feet.x - w_ * 0.5f);
+		ret.right = (int)(ret.left + w_);
+		ret.bottom = (feet.y > head.y ? (int)(feet.y) : (int)(head.y));
+		ret.top = (feet.y > head.y ? (int)(head.y) : (int)(feet.y));
+
+		return ret;
+	};
 
 	for (size_t i = 0; i <= Interfaces::Get().Engine->GetMaxClients(); i++)
 	{
@@ -22,9 +37,9 @@ void ESPBox::Render()
 
 		if (!ent) continue;
 		
-		//std::cout << "Health = " << ent->GetHealth() << " IsDormant = " << ent->isDormant() <<"\n";
-
 		if (ent->GetHealth() <= 0 || ent == CBasePlayer::GetLocalPlayer() || !ent->isDormant()) continue;
+
+		if (CBasePlayer::GetLocalPlayer()->GetDistance(ent) >= CoreSettings::Get().GetHackSettings()->ESP->MaxEspDistance);
 
 		Math::CVector vOrigin = ent->GetOrigin();
 		Math::CVector vHead = GameTools::GetEntityBone(ent, ECSPlayerBones::head_0);
@@ -35,29 +50,28 @@ void ESPBox::Render()
 
 		if (GameTools::WorldToScreen(vHead, vScreenHead) && GameTools::WorldToScreen(vOrigin, vScreenOrigin))
 		{
-			float h = abs(vScreenHead.y - vScreenOrigin.y);
-			float w = h * 0.65f;
+			auto Box = get_box(vScreenOrigin, vScreenHead);
 
-			float x1, x2, y1, y2;
+			DXDraw::RenderOutlinedRect(Box.left, Box.top, Box.right, Box.bottom, CColor(CoreSettings::Get().GetHackSettings()->ESP->BoxColor));
 
-			x1 = vScreenOrigin.x - w / 2;
-			y1 = vScreenOrigin.y;
-			x2 = x1 + w;
-			y2 = -h + y1;
+			if (CoreSettings::Get().GetHackSettings()->ESP->DrawHealth)
+			{
+				float CurHealth = ent->GetHealth();
+				float maxHp = ent->GetMaxHealth();
 
-			//std::cout << "Box color = " << "r = " << CoreSettings::Get().GetHackSettings()->ESP->BoxColor[0] << " g = " << CoreSettings::Get().GetHackSettings()->ESP->BoxColor[1] << " b = " << CoreSettings::Get().GetHackSettings()->ESP->BoxColor[2] <<"\n";
-			DXDraw::RenderOutlinedRect(drawlist, x1, y1, x2, y2, CColor(CoreSettings::Get().GetHackSettings()->ESP->BoxColor));
+				DXDraw::RenderRectFilled(Box.left - 6, Box.top, Box.left - 3, Box.bottom, CColor(0.f, 0.f, 0.f), 5, 0);
 
-			auto health = ent->GetHealth();
+				auto x_start = Box.left - 5;
+				auto y_start = Box.top + 1;
+				auto y_end = Box.bottom - 1;
 
-			auto offset = (std::min)(static_cast<float>(health) / ent->GetMaxHealth(), 1.f);
-			int green = int(health * 2.55f);
-			int red = 255 - green;
-			DXDraw::RenderRectFilled(drawlist, x1 - 5.f, y1 - 1.f, x1 - 2.f, y2 + 1.f, CColor(0, 0, 0));
-			if (health > 0)
-				DXDraw::RenderRectFilled(drawlist, x1 - 4.f, y1, x1 - 3.f, y1 - offset * (y1 - y2), CColor(red, green, 0));
+				auto y_size = (y_end - y_start) / maxHp * CurHealth;
 
+				DXDraw::RenderLine(x_start, y_end - y_size, x_start, y_end, CColor(0.f, 1.f, 0.f));
+			}
 		}
 
 	}
 }
+
+#pragma warning( pop )

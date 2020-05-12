@@ -16,7 +16,8 @@ public:
 	IDirect3DDevice9* DirectX = nullptr;
 	IInputSystem* InputSystem = nullptr;
 	IClientMode* ClientMode = nullptr;
-
+	IEngineTrace* EngineTrace = nullptr;
+	IRenderView* RenderView = nullptr;
 
 	void Parse();
 	bool Init();

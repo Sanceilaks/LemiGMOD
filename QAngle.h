@@ -1,4 +1,7 @@
 #pragma once
+#pragma warning( push )
+#pragma warning( disable : 4244)
+
 
 #include "vector.h"
 
@@ -62,5 +65,19 @@ namespace Math
 		}
 		return delta;
 	}
+	static float RadiansToDegrees(float rad)
+	{
+		return rad * (180.0 / 3.141592653589793238463);
+	}
 
+
+	static QAngle CalculateRelativeAngle(const QAngle& source, const QAngle& destination, const QAngle& viewAngles) noexcept
+	{
+		QAngle delta = destination - source;
+		QAngle angles { RadiansToDegrees(atan2f(-delta.z, std::hypotf(delta.x, delta.y))) - viewAngles.x,
+					   RadiansToDegrees(atan2f(delta.y, delta.x)) - viewAngles.y, 0 };
+		ClampAngles(angles);
+		return angles;
+	}
 }
+#pragma warning( pop )

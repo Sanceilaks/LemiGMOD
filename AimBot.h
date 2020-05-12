@@ -6,7 +6,11 @@
 class AimBot : public Singleton<AimBot>
 {
 public:
-	CBasePlayer* GetClosestEnemy();
-	void DoAim(CUserCmd* UCMD);
+	CBasePlayer* TargetPly = nullptr;
+
+
+	CBasePlayer* GetClosestEnemy(CUserCmd* UCMD);
+	bool DoAim(CUserCmd* UCMD);
+	void DrawTarget();
 };
 

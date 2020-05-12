@@ -6,6 +6,12 @@
 #include "QAngle.h"
 #include "math.h"
 
+
+
+#pragma warning( push )
+#pragma warning( disable : 4244) //4244
+
+
 enum ECSPlayerBones {
 	pelvis = 0,
 	spine_0,
@@ -86,4 +92,112 @@ public:
 		return angles;
 	}
 
+	static Math::CVector CalcAngle(Math::CVector src, Math::CVector dst)
+	{
+		auto ret = Math::CVector();
+		Math::CVector delta = src - dst;
+		double hyp = delta.Length2D();
+		ret.y = (atan(delta.y / delta.x) * 57.295779513082f);
+		ret.x = (atan(delta.z / hyp) * 57.295779513082f);
+		ret.z = 0.f;
+
+		if (delta.x >= 0.f)
+			ret.y += 180.f;
+		return ret;
+	}
+
+	static float GetFoV(Math::QAngle qAngles, Math::CVector vecSource, Math::CVector vecDestination, bool bDistanceBased)
+	{
+		auto MakeVector = [](Math::QAngle qAngles)
+		{
+			auto ret = Math::CVector();
+			auto pitch = float(qAngles[0] * M_PI / 180.f);
+			auto yaw = float(qAngles[1] * M_PI / 180.f);
+			auto tmp = float(cos(pitch));
+			ret.x = float(-tmp * -cos(yaw));
+			ret.y = float(sin(yaw) * tmp);
+			ret.z = float(-sin(pitch));
+			return ret;
+		};
+
+		Math::CVector ang, aim;
+		double fov;
+
+		ang = CalcAngle(vecSource, vecDestination);
+		aim = MakeVector(qAngles);
+		ang = MakeVector(ang);
+
+		auto mag_s = sqrt((aim[0] * aim[0]) + (aim[1] * aim[1]) + (aim[2] * aim[2]));
+		auto mag_d = sqrt((aim[0] * aim[0]) + (aim[1] * aim[1]) + (aim[2] * aim[2]));
+		auto u_dot_v = aim[0] * ang[0] + aim[1] * ang[1] + aim[2] * ang[2];
+
+		fov = acos(u_dot_v / (mag_s * mag_d)) * (180.f / M_PI);
+
+		if (bDistanceBased) {
+			fov *= 1.4;
+			float xDist = abs(vecSource[0] - vecDestination[0]);
+			float yDist = abs(vecSource[1] - vecDestination[1]);
+			float Distance = sqrt((xDist * xDist) + (yDist * yDist));
+
+			Distance /= 650.f;
+
+			if (Distance < 0.7f)
+				Distance = 0.7f;
+
+			if (Distance > 6.5)
+				Distance = 6.5;
+
+			fov *= Distance;
+		}
+
+		return (float)fov;
+	}
+
+	static bool IsVisible(Math::CVector TraceStartPos, Math::CVector TraceEndPos, CBasePlayer* player)
+	{
+		CBasePlayer* LocalPlayer = CBasePlayer::GetLocalPlayer();
+		if (!LocalPlayer)
+			return false;
+
+		Ray_t ray;
+		trace_t tr;
+		CTraceFilter filter;
+		filter.pSkip = LocalPlayer;
+
+		Math::CVector EyePos = LocalPlayer->GetEyePosition();
+
+		ray.Init(EyePos, TraceEndPos);
+
+		Interfaces::Get().EngineTrace->TraceRay(ray, 0x46004003, &filter, &tr);
+
+		if (tr.m_pEnt == player || tr.fraction >= 0.98f)
+			return true;
+		return false;
+	}
+
+	static int GetFov()
+	{
+		if (!Interfaces::Get().Engine->isInGame())
+			return 0;
+
+		auto glua = Interfaces::Get().LuaShared->CreateInterface(LUA::Type::client);
+		if (!glua) return 0;
+
+		glua->PushSpecial(LUA::Special::glob);
+		glua->GetField(-1, "LocalPlayer");
+		glua->Call(0, 1);
+
+		glua->GetField(-1, "GetFOV");
+		glua->Push(-2);
+		glua->Call(1, 1);
+
+		int ret = glua->GetNumber();
+		glua->Pop(3);
+
+		return ret;
+	}
+
 };
+
+
+#pragma warning( pop )

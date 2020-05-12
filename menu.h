@@ -1,5 +1,7 @@
 #pragma once
 #include "imgui/imgui.h"
+#include "imgui/impl/imgui_impl_dx9.h"
+#include "imgui/impl/imgui_impl_win32.h"
 #include "HackCore.h"
 #include "CustomUIModules.h"
 #include "Settings.h"
@@ -43,9 +45,16 @@ namespace Menu
 		{
 			static void Draw()
 			{
-				ImGui::BeginGroup();
+				ImGui::BeginGroup();		//espbox
 				ImGui::Checkbox("ESPBox active", &CoreSettings::Get().GetHackSettings()->ESP->IsActive); ImGui::SameLine();
 				ImGui::ColorEdit3("ESPBox color", CoreSettings::Get().GetHackSettings()->ESP->BoxColor, ImGuiColorEditFlags_NoOptions | ImGuiColorEditFlags_RGB | ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_NoInputs);
+				ImGui::Checkbox("Draw health", &CoreSettings::Get().GetHackSettings()->ESP->DrawHealth);
+				ImGui::SliderInt("Max distance", &CoreSettings::Get().GetHackSettings()->ESP->MaxEspDistance, 0, 100000);
+				ImGui::EndGroup();
+				ImGui::BeginGroup();
+				ImGui::Checkbox("Draw Fov", &CoreSettings::Get().GetHackSettings()->AIM->DrawFov);
+				ImGui::Checkbox("Custom View Model", &CoreSettings::Get().GetHackSettings()->VISUAL->bCustomViewModelFov);
+				ImGui::SliderInt("Custom View Model Val", &CoreSettings::Get().GetHackSettings()->VISUAL->iCustomViewModelFov, 0, 250);
 				ImGui::EndGroup();
 			};
 		};
@@ -57,6 +66,14 @@ namespace Menu
 				ImGui::Checkbox("Aim active", &CoreSettings::Get().GetHackSettings()->AIM->isActive);
 				ImGui::SameLine();
 				ImGui::Checkbox("Silent", &CoreSettings::Get().GetHackSettings()->AIM->isSilent);
+				ImGui::SameLine();
+				ImGui::Checkbox("Only Visible", &CoreSettings::Get().GetHackSettings()->AIM->OnlyVisible);
+				ImGui::Spacing();
+				ImGui::SliderInt("FOV", &CoreSettings::Get().GetHackSettings()->AIM->AimFov, 0, 360);
+				ImGui::SliderInt("Max distance", &CoreSettings::Get().GetHackSettings()->AIM->MaxAimDistance, 0, 100000);
+				ImGui::Hotkey("AimKey", &CoreSettings::Get().GetHackSettings()->AIM->AimKey);
+				ImGui::Spacing();
+				ImGui::Combo("Aim Type", &CoreSettings::Get().GetHackSettings()->AIM->AimType, AimTypeName, 2);
 				ImGui::EndGroup();
 			};
 		}
@@ -74,7 +91,7 @@ namespace Menu
 			static void Draw()
 			{
 				ImGui::BeginGroup();
-				ImGui::Checkbox("BHOP active", &CoreSettings::Get().GetHackSettings()->BHOP->isActive);
+				ImGui::Checkbox("BannyHop", &CoreSettings::Get().GetHackSettings()->BHOP->isActive);
 				ImGui::EndGroup();
 			};
 		}
@@ -83,7 +100,7 @@ namespace Menu
 			static void Draw()
 			{
 				ImGui::BeginGroup();
-				//ImGui::Checkbox("ESPBox active", &CoreSettings::Get().GetHackSettings()->ESP->IsActive);
+				ImGui::Hotkey("Open Menu On", &CoreSettings::Get().GetMenuSettings()->MainSettings->TriggerKey);
 				ImGui::EndGroup();
 			};
 		}
@@ -115,7 +132,7 @@ namespace Menu
 
 	static void Draw()
 	{
-		ImGui::Begin("Hello", (bool*)0, ImVec2(700, 340), 0.9f, ImGuiWindowFlags_NoResize);
+		ImGui::Begin("Hello", (bool*)0, ImVec2(700, 340), 0.9f, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
 		ImGui::SameLine();
 
 		ImGui::BeginChild("###tabs", ImVec2(600, 40));
