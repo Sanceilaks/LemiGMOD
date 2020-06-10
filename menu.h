@@ -53,8 +53,8 @@ namespace Menu
 				ImGui::EndGroup();
 				ImGui::BeginGroup();
 				ImGui::Checkbox("Draw Fov", &CoreSettings::Get().GetHackSettings()->AIM->DrawFov);
-				ImGui::Checkbox("Custom View Model", &CoreSettings::Get().GetHackSettings()->VISUAL->bCustomViewModelFov);
-				ImGui::SliderInt("Custom View Model Val", &CoreSettings::Get().GetHackSettings()->VISUAL->iCustomViewModelFov, 0, 250);
+				//ImGui::Checkbox("Custom Fov", &CoreSettings::Get().GetHackSettings()->VISUAL->bCustomFov);
+				//ImGui::SliderInt("Custom Fov Val", &CoreSettings::Get().GetHackSettings()->VISUAL->iCustomFov, 0, 250);
 				ImGui::EndGroup();
 			};
 		};
@@ -68,6 +68,8 @@ namespace Menu
 				ImGui::Checkbox("Silent", &CoreSettings::Get().GetHackSettings()->AIM->isSilent);
 				ImGui::SameLine();
 				ImGui::Checkbox("Only Visible", &CoreSettings::Get().GetHackSettings()->AIM->OnlyVisible);
+				ImGui::SameLine();
+				ImGui::Checkbox("AutoFire", &CoreSettings::Get().GetHackSettings()->AIM->AutoFire);
 				ImGui::Spacing();
 				ImGui::SliderInt("FOV", &CoreSettings::Get().GetHackSettings()->AIM->AimFov, 0, 360);
 				ImGui::SliderInt("Max distance", &CoreSettings::Get().GetHackSettings()->AIM->MaxAimDistance, 0, 100000);
@@ -101,6 +103,7 @@ namespace Menu
 			{
 				ImGui::BeginGroup();
 				ImGui::Hotkey("Open Menu On", &CoreSettings::Get().GetMenuSettings()->MainSettings->TriggerKey);
+				//ImGui::Combo("Draw Type", &CoreSettings::Get().GetHackSettings()->VISUAL->Dtype, HDrawTypeName, 2);
 				ImGui::EndGroup();
 			};
 		}

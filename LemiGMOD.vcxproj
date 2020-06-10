@@ -163,6 +163,7 @@
     <ClInclude Include="BannyHop.h" />
     <ClInclude Include="BasePlayer.h" />
     <ClInclude Include="CBaseEntity.h" />
+    <ClInclude Include="CBaseWeapon.h" />
     <ClInclude Include="CClientClass.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="CreateMoveHook.h" />
@@ -188,6 +189,7 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClInclude Include="IPanel.h" />
     <ClInclude Include="ISurface.h" />
     <ClInclude Include="IVClientEntityList.h" />
     <ClInclude Include="ConsoleColor.h" />
@@ -207,6 +209,7 @@
     <ClInclude Include="minhook\MinHook.h" />
     <ClInclude Include="Netvars.h" />
     <ClInclude Include="OtherVisual.h" />
+    <ClInclude Include="PaintTreverseHook.h" />
     <ClInclude Include="QAngle.h" />
     <ClInclude Include="RecvProps.h" />
     <ClInclude Include="Render.h" />
@@ -242,6 +245,7 @@
     <ClCompile Include="MemTools.cpp" />
     <ClCompile Include="Netvars.cpp" />
     <ClCompile Include="OtherVisual.cpp" />
+    <ClCompile Include="PaintTreverseHook.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="RenderViewHook.cpp" />
     <ClCompile Include="ResetHook.cpp" />

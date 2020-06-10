@@ -13,6 +13,8 @@ bool Interfaces::Init()
 	this->InputSystem = (IInputSystem*)CMemTools::GetInterface("inputsystem.dll", "InputSystemVersion001");
 	this->EngineTrace = (IEngineTrace*)CMemTools::GetInterface("engine.dll", "EngineTraceClient003");
 	this->RenderView  = (IRenderView*)CMemTools::GetInterface("engine.dll", "VEngineRenderView014");
+	this->Panel       = (IPanel*)CMemTools::GetInterface("vgui2.dll", "VGUI_Panel009");
+
 
 	do {
 		this->ClientMode = **(IClientMode***)((*(uintptr_t**)this->BaseClient)[10] + 0x5);

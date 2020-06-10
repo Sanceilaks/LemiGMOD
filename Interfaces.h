@@ -18,6 +18,7 @@ public:
 	IClientMode* ClientMode = nullptr;
 	IEngineTrace* EngineTrace = nullptr;
 	IRenderView* RenderView = nullptr;
+	IPanel* Panel = nullptr;
 
 	void Parse();
 	bool Init();

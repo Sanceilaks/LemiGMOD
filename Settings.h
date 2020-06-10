@@ -14,6 +14,17 @@ enum AimType
 	DISTANCE = 1
 };
 
+enum HDrawType
+{
+	imgui,
+	dx
+};
+
+const char* const HDrawTypeName[] = {
+	"Stable",
+	"Fast"
+};
+
 const char* const AimTypeName[] = {
 	"Fov",
 	"Distance"
@@ -29,8 +40,9 @@ public:
 struct Visuals
 {
 public:
-	bool bCustomViewModelFov = false;
-	int iCustomViewModelFov = 90;
+	int Dtype = imgui;
+	bool bCustomFov = false;
+	int iCustomFov = 90;
 };
 
 struct EspSettings
@@ -47,6 +59,7 @@ struct AimSettings
 public:
 	bool isActive = true;
 	bool isSilent = true;
+	bool AutoFire = true;
 	bool OnlyVisible = true;
 	bool DrawFov = false;
 	int AimKey = 18;

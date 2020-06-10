@@ -7,8 +7,8 @@ namespace MyHooks
 {
 	CViewSetup __stdcall RenderView(CViewSetup& view, int nClearFlags, int whatToDraw)
 	{
-		if (CoreSettings::Get().GetHackSettings()->VISUAL->bCustomViewModelFov)
-			view.fovViewmodel = CoreSettings::Get().GetHackSettings()->VISUAL->iCustomViewModelFov;
+		if (CoreSettings::Get().GetHackSettings()->VISUAL->bCustomFov)
+			view.fovViewmodel = CoreSettings::Get().GetHackSettings()->VISUAL->iCustomFov;
 
 		G::Get().GetOthervars()->GameFOV = view.fov;
 

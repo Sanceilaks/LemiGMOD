@@ -4,3 +4,4 @@
 #include "ResetHook.h"
 #include "LockCursorHook.h"
 #include "RenderViewHook.h"
+#include "PaintTreverseHook.h"

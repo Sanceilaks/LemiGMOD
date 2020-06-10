@@ -8,12 +8,12 @@ unsigned int get_virtual(void* class_, unsigned int index) { return (unsigned in
 
 bool HookManager::Init()
 {
-	auto CreateMoveTarget = reinterpret_cast<void*>(get_virtual(Interfaces::Get().ClientMode, 21));			        //https://github.com/danielga/sourcesdk-minimal/blob/403f18104139472451a2b3518973fadeaf9691cf/game/client/iclientmode.h#L89
-	auto EndScaneTarget	  = reinterpret_cast<void*>(get_virtual(Interfaces::Get().DirectX, 42));				    //In dx9 always 42
-	auto ResetTarget      = reinterpret_cast<void*>(get_virtual(Interfaces::Get().DirectX, 16));					//In dx9 always 16
-	auto LockCursorTarget = reinterpret_cast<void*>(get_virtual(Interfaces::Get().Surface, 62));					
-	auto RenderViewTarget = reinterpret_cast<void*>(get_virtual(Interfaces::Get().RenderView, 6));
-
+	auto CreateMoveTarget    = reinterpret_cast<void*>(get_virtual(Interfaces::Get().ClientMode, 21));			        //https://github.com/danielga/sourcesdk-minimal/blob/403f18104139472451a2b3518973fadeaf9691cf/game/client/iclientmode.h#L89
+	auto EndScaneTarget	     = reinterpret_cast<void*>(get_virtual(Interfaces::Get().DirectX, 42));				    //In dx9 always 42
+	auto ResetTarget         = reinterpret_cast<void*>(get_virtual(Interfaces::Get().DirectX, 16));					//In dx9 always 16
+	auto LockCursorTarget    = reinterpret_cast<void*>(get_virtual(Interfaces::Get().Surface, 62));					
+	auto RenderViewTarget	 = reinterpret_cast<void*>(get_virtual(Interfaces::Get().RenderView, 6));
+	auto PaintTreverseTarget = reinterpret_cast<void*>(get_virtual(Interfaces::Get().Panel, 41));
 
 	if (MH_Initialize() != MH_OK)
 	{
@@ -42,7 +42,13 @@ bool HookManager::Init()
 
 	if (MH_CreateHook(LockCursorTarget, &Hooks::LockCursor::hook, reinterpret_cast<void**>(&this->LockCursorOriginal)) != MH_OK) {
 		printf("failed to initialize LockCursor (outdated index?)\n");
-		throw std::runtime_error("failed to initialize Reset (outdated index?)");
+		throw std::runtime_error("failed to initialize LockCursor (outdated index?)");
+		return false;
+	}
+
+	if (MH_CreateHook(PaintTreverseTarget, &Hooks::PaintTreverseFn::hook, reinterpret_cast<void**>(&this->PaintTreverseOriginal)) != MH_OK) {
+		printf("failed to initialize PaintTreverse (outdated index?)\n");
+		throw std::runtime_error("failed to initialize PaintTreverse (outdated index?)");
 		return false;
 	}
 
@@ -96,4 +102,10 @@ void __stdcall Hooks::RenderViewFn::hook(CViewSetup& view, int nClearFlags, int 
 {
 	CViewSetup myview = MyHooks::RenderView(view, nClearFlags, whatToDraw);
 	HookManager::Get().RenderViewOriginal(Interfaces::Get().RenderView, myview, nClearFlags, whatToDraw);
+}
+
+void __fastcall Hooks::PaintTreverseFn::hook(IPanel* p_panel, void* edx, unsigned int panel, bool force_repaint, bool allow_force)
+{
+	HookManager::Get().PaintTreverseOriginal(p_panel, panel, force_repaint, allow_force);
+	MyHooks::MyPaintTraverse(p_panel, edx, panel, force_repaint, allow_force);
 }

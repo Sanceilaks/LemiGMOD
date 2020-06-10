@@ -17,6 +17,9 @@ void ESPBox::Render()
 	if (!Interfaces::Get().Engine->isInGame())
 		return;
 
+	if (CoreSettings::Get().GetHackSettings()->VISUAL->Dtype == dx)
+		DXRender::Get().Begin();
+
 	auto get_box = [](Math::CVector feet, Math::CVector head) -> RECT {
 		RECT ret;
 
@@ -42,7 +45,7 @@ void ESPBox::Render()
 		if (CBasePlayer::GetLocalPlayer()->GetDistance(ent) >= CoreSettings::Get().GetHackSettings()->ESP->MaxEspDistance);
 
 		Math::CVector vOrigin = ent->GetOrigin();
-		Math::CVector vHead = GameTools::GetEntityBone(ent, ECSPlayerBones::head_0);
+		Math::CVector vHead = ent->GetEyePosition();
 
 		vHead += 15.0f;
 
@@ -52,14 +55,23 @@ void ESPBox::Render()
 		{
 			auto Box = get_box(vScreenOrigin, vScreenHead);
 
-			DXDraw::RenderOutlinedRect(Box.left, Box.top, Box.right, Box.bottom, CColor(CoreSettings::Get().GetHackSettings()->ESP->BoxColor));
+			//if (CoreSettings::Get().GetHackSettings()->VISUAL->Dtype == imgui)
+				DXDraw::RenderOutlinedRect(Box.left, Box.top, Box.right, Box.bottom, CColor(CoreSettings::Get().GetHackSettings()->ESP->BoxColor));
+			//else
+			//{
+			//	auto color = D3DCOLOR_RGBA(CoreSettings::Get().GetHackSettings()->ESP->BoxColor[0], CoreSettings::Get().GetHackSettings()->ESP->BoxColor[1], CoreSettings::Get().GetHackSettings()->ESP->BoxColor, 255)
+			//	DXRender::Get().RenderBorderedBox(Vec2(Box.left, Box.top), Box.right - Box.left, Box.bottom - Box.top, 3, D3DCOLOR());
+			//}
 
 			if (CoreSettings::Get().GetHackSettings()->ESP->DrawHealth)
 			{
+				//				int x = Box.left, y = Box.top, w = Box.right - Box.left, h = Box.bottom - Box.top;
 				float CurHealth = ent->GetHealth();
 				float maxHp = ent->GetMaxHealth();
-
-				DXDraw::RenderRectFilled(Box.left - 6, Box.top, Box.left - 3, Box.bottom, CColor(0.f, 0.f, 0.f), 5, 0);
+				//if (CoreSettings::Get().GetHackSettings()->VISUAL->Dtype == imgui)
+					DXDraw::RenderRectFilled(Box.left - 6, Box.top, Box.left - 3, Box.bottom, CColor(0.f, 0.f, 0.f), 5, 0);
+				//else
+				//	DXRender::Get().RenderFilledBox(Vec2(Box.left - 6, Box.top), Box.right - (Box.left - 3), Box.bottom - Box.top, D3DCOLOR(0.f, 0.f, 0.f))
 
 				auto x_start = Box.left - 5;
 				auto y_start = Box.top + 1;
@@ -67,11 +79,12 @@ void ESPBox::Render()
 
 				auto y_size = (y_end - y_start) / maxHp * CurHealth;
 
-				DXDraw::RenderLine(x_start, y_end - y_size, x_start, y_end, CColor(0.f, 1.f, 0.f));
+				DXDraw::RenderLine(x_start, y_end - y_size, x_start, y_end, CColor(0, 255, 0));
 			}
 		}
-
 	}
+	if (CoreSettings::Get().GetHackSettings()->VISUAL->Dtype == dx)
+		DXRender::Get().End();
 }
 
 #pragma warning( pop )

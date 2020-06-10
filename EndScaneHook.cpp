@@ -9,5 +9,5 @@ void __stdcall MyHooks::EndScane(IDirect3DDevice9* device)
 		isInit = true;
 	}
 	else
-		Render::Get().NewFrame();
+		Render::Get().NewFrame(device);
 }

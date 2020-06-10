@@ -255,6 +255,15 @@
     <ClInclude Include="OtherVisual.h">
       <Filter>Файлы заголовков\HACKS</Filter>
     </ClInclude>
+    <ClInclude Include="PaintTreverseHook.h">
+      <Filter>Файлы заголовков\CORE\HOOKS</Filter>
+    </ClInclude>
+    <ClInclude Include="IPanel.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="CBaseWeapon.h">
+      <Filter>Файлы заголовков\CORE\CLASES</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -337,6 +346,9 @@
     </ClCompile>
     <ClCompile Include="OtherVisual.cpp">
       <Filter>Исходные файлы\HACKS</Filter>
+    </ClCompile>
+    <ClCompile Include="PaintTreverseHook.cpp">
+      <Filter>Исходные файлы\CORE\HOOKS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

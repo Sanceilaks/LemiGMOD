@@ -18,10 +18,8 @@ bool __fastcall MyHooks::MyCreateMoveHook(void* ecx, void* edx, int FrameTime, C
 	BannyHop::Get().DoBhop(UCMD);
 
 	if (GetAsyncKeyState(CoreSettings::Get().GetHackSettings()->AIM->AimKey))
-	{//if ALT				TODO:	ADD CUSTOM AIM BUTTON  (and use it in InputSystem. Without Windows.h)
 		if (!AimBot::Get().DoAim(UCMD))
 			G::Get().GetOthervars()->isAiming = false;
-	}
 	else
 		G::Get().GetOthervars()->isAiming = false;
 
@@ -29,6 +27,9 @@ bool __fastcall MyHooks::MyCreateMoveHook(void* ecx, void* edx, int FrameTime, C
 		UCMD->Buttons &= ~IN_ATTACK;
 
 	G::Get().GetOthervars()->GameFOV = GameTools::GetFov();
+
+	//if (CoreSettings::Get().GetHackSettings()->VISUAL->bCustomFov)
+	//	GameTools::SetFov(CoreSettings::Get().GetHackSettings()->VISUAL->iCustomFov);
 
 	return false;
 }

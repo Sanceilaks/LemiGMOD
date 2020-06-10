@@ -10,3 +10,4 @@
 #include "IClientMode.h"
 #include "EngineTrace.h"
 #include "RenderView.h"
+#include "IPanel.h"

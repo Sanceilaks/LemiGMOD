@@ -41,6 +41,7 @@ public:
 
 		return Math::CVector(hitbox[0][3], hitbox[1][3], hitbox[2][3]);
 	}
+
 	static bool WorldToScreen(Math::CVector in, Math::CVector& out)
 	{
 		const Math::VMatrix w2sm = Interfaces::Get().Engine->GetViewMatrix();
@@ -196,6 +197,28 @@ public:
 
 		return ret;
 	}
+
+	static void SetFov(int fov)
+	{
+		if (!Interfaces::Get().Engine->isInGame())
+			return;
+
+		auto glua = Interfaces::Get().LuaShared->CreateInterface(LUA::Type::client);
+		if (!glua) return;
+
+		glua->PushSpecial(LUA::Special::glob);
+
+		glua->GetField(-1, "LocalPlayer");
+		glua->Call(0, 1);
+
+		glua->GetField(-1, "SetFOV");
+		glua->PushNumber(fov);
+		glua->Call(1, 0);
+
+		glua->Pop(3);
+	}
+
+	static void SetViewModelFov() {};
 
 };
 

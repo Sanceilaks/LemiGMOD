@@ -5,6 +5,7 @@
 #include "ISurface.h"
 #include "RenderView.h"
 #include "CViewSetup.h"
+#include "IPanel.h"
 
 namespace Hooks
 {
@@ -35,6 +36,12 @@ namespace Hooks
 		using func = void(__thiscall*)(IRenderView*, CViewSetup&, int, int);
 		static void __stdcall hook(CViewSetup& view, int nClearFlags, int whatToDraw);
 	};
+
+	namespace PaintTreverseFn
+	{
+		using func = void(__thiscall*)(IPanel*, unsigned int, bool, bool);
+		static void __fastcall hook(IPanel* p_panel, void*, unsigned int panel, bool force_repaint, bool allow_force);
+	};
 }
 
 
@@ -49,6 +56,7 @@ public:
 	Hooks::Reset::func ResetOriginal = nullptr;
 	Hooks::LockCursor::func LockCursorOriginal = nullptr;
 	Hooks::RenderViewFn::func RenderViewOriginal = nullptr;
+	Hooks::PaintTreverseFn::func PaintTreverseOriginal = nullptr;
 
 	void UnhookAll();
 	bool Init();

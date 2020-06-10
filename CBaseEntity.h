@@ -45,6 +45,11 @@ public:
 		using original_fn = ClientClass * (__thiscall*)(void*);
 		return (*(original_fn**)Networkable())[3](Networkable());
 	}
+	const char* GetClassName()
+	{
+		using orig_fn = const char* (__thiscall*)(void*);
+		return (*(orig_fn**)Networkable())[2](Networkable());
+	}
 	bool isAlive()
 	{
 		using original_fn = bool(__thiscall*)(void*);
@@ -84,5 +89,10 @@ public:
 	float GetDistance(CBaseEntity* to)
 	{
 		return this->GetOrigin().DistTo(to->GetOrigin());
+	}
+
+	inline bool isNPC()
+	{
+		return std::memcmp(this->GetClassNameA(), "npc", 3);
 	}
 };

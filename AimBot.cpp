@@ -35,7 +35,7 @@ CBasePlayer* AimBot::GetClosestEnemy(CUserCmd* UCMD)
 		float currentdist = LocalPlayer->GetDistance(ent);
 		int currentfov = GameTools::GetFoV(UCMD->ViewAngles, LocalPlayer->GetEyePosition(), ent->GetEyePosition(), false);
 
-		if (CoreSettings::Get().GetHackSettings()->AIM->AimKey == AimType::DISTANCE)
+		if (CoreSettings::Get().GetHackSettings()->AIM->AimType == AimType::DISTANCE)
 		{
 			if (!(currentdist < maxdist)) continue;
 			if (!(currentfov < MaxFov)) continue;
@@ -74,6 +74,11 @@ bool AimBot::DoAim(CUserCmd* UCMD)
 	else
 		UCMD->ViewAngles = ang;
 
+	if (CoreSettings::Get().GetHackSettings()->AIM->AutoFire)
+		if (GameTools::IsVisible(LocalPlayer->GetEyePosition(), enemy->GetEyePosition(), enemy))
+			if (LocalPlayer->GetActiveWeapon()->CanFire())
+				UCMD->Buttons |= IN_ATTACK;
+
 	G::Get().GetOthervars()->isAiming = true;
 	this->TargetPly = enemy;
 	return true;
@@ -92,7 +97,7 @@ void AimBot::DrawTarget()
 	Math::CVector vScreenHead;
 
 	if (GameTools::WorldToScreen(vHead, vScreenHead))
-		DXDraw::RenderOutlinedCricle(vScreenHead.x, vScreenHead.y, 10, CColor(50, 10, 60));
+			DXDraw::RenderOutlinedCricle(vScreenHead.x, vScreenHead.y, 10, CColor(50, 10, 60));
 }
 
 #pragma warning( pop )
