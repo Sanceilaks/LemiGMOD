@@ -47,14 +47,25 @@ namespace Menu
 			{
 				ImGui::BeginGroup();		//espbox
 				ImGui::Checkbox("ESPBox active", &CoreSettings::Get().GetHackSettings()->ESP->IsActive); ImGui::SameLine();
-				ImGui::ColorEdit3("ESPBox color", CoreSettings::Get().GetHackSettings()->ESP->BoxColor, ImGuiColorEditFlags_NoOptions | ImGuiColorEditFlags_RGB | ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_NoInputs);
+				ImGui::ColorEdit3("ESPBox visible color", CoreSettings::Get().GetHackSettings()->ESP->VBoxColor, ImGuiColorEditFlags_NoOptions | ImGuiColorEditFlags_RGB | ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_NoInputs);
+				ImGui::SameLine();
+				ImGui::ColorEdit3("ESPBox invisible color", CoreSettings::Get().GetHackSettings()->ESP->IBoxColor, ImGuiColorEditFlags_NoOptions | ImGuiColorEditFlags_RGB | ImGuiColorEditFlags_Uint8 | ImGuiColorEditFlags_NoInputs);
 				ImGui::Checkbox("Draw health", &CoreSettings::Get().GetHackSettings()->ESP->DrawHealth);
 				ImGui::SliderInt("Max distance", &CoreSettings::Get().GetHackSettings()->ESP->MaxEspDistance, 0, 100000);
 				ImGui::EndGroup();
 				ImGui::BeginGroup();
 				ImGui::Checkbox("Draw Fov", &CoreSettings::Get().GetHackSettings()->AIM->DrawFov);
-				//ImGui::Checkbox("Custom Fov", &CoreSettings::Get().GetHackSettings()->VISUAL->bCustomFov);
-				//ImGui::SliderInt("Custom Fov Val", &CoreSettings::Get().GetHackSettings()->VISUAL->iCustomFov, 0, 250);
+				ImGui::Checkbox("Custom Fov", &CoreSettings::Get().GetHackSettings()->VISUAL->bCustomFov);
+				ImGui::SameLine();
+				ImGui::PushItemWidth(60);
+				ImGui::SliderInt("Custom Fov Value", &CoreSettings::Get().GetHackSettings()->VISUAL->iCustomFov, 0, 250);
+				ImGui::PopItemWidth();
+				ImGui::SameLine();
+				ImGui::Checkbox("Custom Viewmodel Fov", &CoreSettings::Get().GetHackSettings()->VISUAL->bCustomViewmodelFov);
+				ImGui::SameLine();
+				ImGui::PushItemWidth(60);
+				ImGui::SliderInt("Custom Viewmodel Fov Value", &CoreSettings::Get().GetHackSettings()->VISUAL->iCustomViewmodelFov, 0, 250);
+				ImGui::PopItemWidth();
 				ImGui::EndGroup();
 			};
 		};
@@ -93,7 +104,7 @@ namespace Menu
 			static void Draw()
 			{
 				ImGui::BeginGroup();
-				ImGui::Checkbox("BannyHop", &CoreSettings::Get().GetHackSettings()->BHOP->isActive);
+				ImGui::Checkbox("BunnyHop", &CoreSettings::Get().GetHackSettings()->BHOP->isActive);
 				ImGui::EndGroup();
 			};
 		}

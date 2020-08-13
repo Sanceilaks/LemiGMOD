@@ -43,6 +43,9 @@ public:
 	int Dtype = imgui;
 	bool bCustomFov = false;
 	int iCustomFov = 90;
+
+	bool bCustomViewmodelFov = false;
+	int iCustomViewmodelFov = 90;
 };
 
 struct EspSettings
@@ -51,7 +54,8 @@ public:
 	bool IsActive = true;
 	bool DrawHealth = true;
 	int MaxEspDistance = 1000;
-	float BoxColor[3] = { 10, 10, 10};
+	float VBoxColor[3] = { 0, 255, 0};
+	float IBoxColor[3] = { 255, 0, 0 };
 	float NameColor[3] = { 255, 0, 0};
 };
 struct AimSettings

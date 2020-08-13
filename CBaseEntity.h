@@ -5,6 +5,8 @@
 #include "vector.h"
 #include "Netvars.h"
 #include "VMatrix.h"
+#include "LUA.h"
+
 
 class CBaseEntity
 {
@@ -21,10 +23,11 @@ public:
 		return (Y*)((DWORD)this + offset);
 	}
 
-	void* Animating() 
+	void* Renderable()
 	{
 		return reinterpret_cast<void*>(uintptr_t(this) + 0x4);
 	}
+
 	void* Networkable() 
 	{
 		return reinterpret_cast<void*>(uintptr_t(this) + 0x8);
@@ -81,7 +84,7 @@ public:
 			return false;
 
 		using original_fn = bool(__thiscall*)(void*, Math::matrix3x4_t*, int, int, float);
-		return (*(original_fn**)Animating())[16](Animating(), out, max_bones, mask, time);
+		return (*(original_fn**)Renderable())[16](Renderable(), out, max_bones, mask, time);
 	}
 
 	NETVAR("DT_BasePlayer", "m_vecOrigin", GetOrigin, Math::CVector);
@@ -95,4 +98,24 @@ public:
 	{
 		return std::memcmp(this->GetClassNameA(), "npc", 3);
 	}
+
+	void DrawModel(int flags)
+	{
+		if (!this)
+			return;
+
+		using original_fn = void(__thiscall*)(void*, int);
+		return (*(original_fn**)Renderable())[10](Renderable(), flags);
+	}
+
+	inline void PushEntity()
+	{
+		using orig_fn = void(__thiscall*)(void*);
+		return(*(orig_fn**)this)[172](this);
+	}
+
+	//inline void PushEntity(LUA::Interface* glua)
+	//{
+
+	//}
 };

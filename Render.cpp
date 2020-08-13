@@ -27,7 +27,6 @@ static LRESULT STDMETHODCALLTYPE user_wndproc(HWND window, UINT message_type, WP
 }
 void Render::Init(IDirect3DDevice9* GameDevice)
 {
-	//std::cout << "Render init...\n";
 
 	ImGui::CreateContext();
 
@@ -35,7 +34,6 @@ void Render::Init(IDirect3DDevice9* GameDevice)
 	auto game_hwnd = FindWindowW(L"Valve001", nullptr);
 	if (game_hwnd != NULL)
 	{
-		//std::cout << "WndProc hooking\n";
 		this->GameHWND = game_hwnd;
 		this->wnd_proc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(game_hwnd, GWLP_WNDPROC, (LONG_PTR)user_wndproc));
 
@@ -50,7 +48,6 @@ void Render::Init(IDirect3DDevice9* GameDevice)
 	this->DrawList = new ImDrawList(ImGui::GetDrawListSharedData());
 	this->DrawListActualy = new ImDrawList(ImGui::GetDrawListSharedData());
 	this->DrawListRender = new ImDrawList(ImGui::GetDrawListSharedData());
-	//std::cout << "Init True\n";
 }
 
 
@@ -83,8 +80,8 @@ void Render::BeginScene()
 	ESPBox::Get().Render();
 	Visual::Get().DrawFovCricle();
 
-	if (GetAsyncKeyState(G::Get().GetOthervars()->isAiming))
-		AimBot::Get().DrawTarget();
+	//if (GetAsyncKeyState(G::Get().GetOthervars()->isAiming))		TODO: FIX
+	//	AimBot::Get().DrawTarget();
 }
 
 ImDrawList* Render::RenderScene()

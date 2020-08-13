@@ -2,6 +2,7 @@
 #include "BasePlayer.h"
 #include "CUserCmd.h"
 #include "Singleton.h"
+#include "QAngle.h"
 
 class AimBot : public Singleton<AimBot>
 {
@@ -12,5 +13,7 @@ public:
 	CBasePlayer* GetClosestEnemy(CUserCmd* UCMD);
 	bool DoAim(CUserCmd* UCMD);
 	void DrawTarget();
+
+	Math::QAngle SpreadAngle(CUserCmd* UCMD);
 };
 

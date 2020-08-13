@@ -5,7 +5,7 @@
 #include "CUserCmd.h"
 #include "QAngle.h"
 #include "math.h"
-
+#include <filesystem>
 
 
 #pragma warning( push )
@@ -184,7 +184,7 @@ public:
 		auto glua = Interfaces::Get().LuaShared->CreateInterface(LUA::Type::client);
 		if (!glua) return 0;
 
-		glua->PushSpecial(LUA::Special::glob);
+		glua->PushSpecial((int)LUA::Special::glob);
 		glua->GetField(-1, "LocalPlayer");
 		glua->Call(0, 1);
 
@@ -206,7 +206,7 @@ public:
 		auto glua = Interfaces::Get().LuaShared->CreateInterface(LUA::Type::client);
 		if (!glua) return;
 
-		glua->PushSpecial(LUA::Special::glob);
+		glua->PushSpecial((int)LUA::Special::glob);
 
 		glua->GetField(-1, "LocalPlayer");
 		glua->Call(0, 1);
@@ -220,6 +220,25 @@ public:
 
 	static void SetViewModelFov() {};
 
+	static bool isHoldingTool()
+	{
+		CBasePlayer* LocalPlayer = CBasePlayer::GetLocalPlayer();
+		CBaseWeapon* ActiveWeapon = LocalPlayer->GetActiveWeapon();
+		if (!ActiveWeapon)
+			return false;
+
+		char const* name = ActiveWeapon->GetClassNameA();
+		if (!name)
+			return false;
+		/*
+			weapon_physgun weapon_physcannon gmod_tool
+		*/
+
+		if (!strcmp(name, "weapon_physgun") || !strcmp(name, "weapon_physcannon") || !strcmp(name, "gmod_tool"))
+			return true;
+
+		return false;
+	}
 };
 
 

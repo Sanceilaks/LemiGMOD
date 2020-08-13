@@ -19,6 +19,11 @@ public:
 	IEngineTrace* EngineTrace = nullptr;
 	IRenderView* RenderView = nullptr;
 	IPanel* Panel = nullptr;
+	IViewRender* ViewRender = nullptr;
+	CUniformRandomStream* Random = nullptr;
+	IMaterialSystem* MaterialSystem = nullptr;
+	IMatRenderContext* RenderContext = nullptr;
+	IVModelRender* ModelRender = nullptr;
 
 	void Parse();
 	bool Init();

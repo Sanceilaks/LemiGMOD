@@ -1,6 +1,6 @@
 #include "CreateMoveHook.h"
 #include "BasePlayer.h"
-#include "BannyHop.h"
+#include "BunnyHop.h"
 #include "GLOBALS.h"
 #include <Windows.h>
 #include "AimBot.h"
@@ -15,7 +15,16 @@ bool __fastcall MyHooks::MyCreateMoveHook(void* ecx, void* edx, int FrameTime, C
 	float oldSlideMove = UCMD->SideMove;
 	float oldForwardMove = UCMD->ForwardMove;
 
-	BannyHop::Get().DoBhop(UCMD);
+	BunnyHop::Get().DoBhop(UCMD);
+
+
+	if (UCMD->Buttons & IN_ATTACK && !GameTools::isHoldingTool())
+	{
+		//std::cout << "Anti spread start!" << std::endl;
+		Math::QAngle spread = AimBot::Get().SpreadAngle(UCMD);
+		UCMD->ViewAngles += spread;
+		//std::cout << "Anti spread end!" << std::endl;
+	}
 
 	if (GetAsyncKeyState(CoreSettings::Get().GetHackSettings()->AIM->AimKey))
 		if (!AimBot::Get().DoAim(UCMD))
@@ -25,8 +34,6 @@ bool __fastcall MyHooks::MyCreateMoveHook(void* ecx, void* edx, int FrameTime, C
 
 	if (G::Get().GetMenuVars()->MenuIsOpen)
 		UCMD->Buttons &= ~IN_ATTACK;
-
-	G::Get().GetOthervars()->GameFOV = GameTools::GetFov();
 
 	//if (CoreSettings::Get().GetHackSettings()->VISUAL->bCustomFov)
 	//	GameTools::SetFov(CoreSettings::Get().GetHackSettings()->VISUAL->iCustomFov);

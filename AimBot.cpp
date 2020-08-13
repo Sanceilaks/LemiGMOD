@@ -6,6 +6,10 @@
 #include "ImGuiBaseDraw.h"
 #include <cmath>
 #include "GLOBALS.h"
+#include "math.h"
+#include "checksum_md5.h"
+
+
 
 #pragma warning( push )
 #pragma warning( disable : 4244) //4244
@@ -69,6 +73,8 @@ bool AimBot::DoAim(CUserCmd* UCMD)
 	Math::QAngle ang = UCMD->ViewAngles;
 	ang = GameTools::CalcAngle(LocalPlayer->GetEyePosition(), GameTools::GetEntityBone(enemy, ECSPlayerBones::head_0));
 
+	ang = ang + SpreadAngle(UCMD);
+
 	if (!CoreSettings::Get().GetHackSettings()->AIM->isSilent)
 		Interfaces::Get().Engine->SetViewAngles(ang);
 	else
@@ -98,6 +104,28 @@ void AimBot::DrawTarget()
 
 	if (GameTools::WorldToScreen(vHead, vScreenHead))
 			DXDraw::RenderOutlinedCricle(vScreenHead.x, vScreenHead.y, 10, CColor(50, 10, 60));
+}
+
+Math::QAngle AimBot::SpreadAngle(CUserCmd* UCMD)
+{
+	CBasePlayer* LocalPlayer = CBasePlayer::GetLocalPlayer();
+
+	Math::CVector SpreadCone = LocalPlayer->GetActiveWeapon()->GetBulletSpread();
+	float Spread = Math::FloatNegate((SpreadCone.x + SpreadCone.y + SpreadCone.z) / 3);
+
+	float Random[2];
+	unsigned int seed = MD5_PseudoRandom(UCMD->CommandNumber) & 0xFF;
+	Interfaces::Get().Random->SetSeed(seed);
+
+	Random[0] = Interfaces::Get().Random->RandomFloat(-0.5f, 0.5f) + Interfaces::Get().Random->RandomFloat(-0.5f, 0.5f);
+	Random[1] = Interfaces::Get().Random->RandomFloat(-0.5f, 0.5f) + Interfaces::Get().Random->RandomFloat(-0.5f, 0.5f);
+
+	Math::CVector ShootDirection = Math::CVector(1.0f, 0.0f, 0.0f) + (Math::CVector(0.0f, -1.0f, 0.0f) * Spread * Random[0]) + 
+		(Math::CVector(0.0f, 0.0f, 1.0f) * Spread * Random[1]); // 0,0,0
+
+	Math::QAngle out = GameTools::CalcAngle(Math::CVector(0, 0, 0), ShootDirection);
+	out = GameTools::FixAngles(out);
+	return out;
 }
 
 #pragma warning( pop )

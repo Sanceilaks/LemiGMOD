@@ -83,5 +83,11 @@ public:
 		using orig_fn = int(__thiscall*)(IVEngineClient*);
 		return(*(orig_fn**)this)[21](this);
 	}
+
+	bool isTakingScreenshot()
+	{
+		using fn = bool(__thiscall*)(IVEngineClient*);
+		return (*(fn**)this)[86](this); //86
+	}
 };
 #pragma warning( pop )

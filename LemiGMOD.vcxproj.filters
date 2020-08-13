@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Файлы ресурсов">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Файлы заголовков\CORE">
       <UniqueIdentifier>{2b0ad5c4-a4a6-4d9a-8aec-e8de3c516740}</UniqueIdentifier>
     </Filter>
@@ -25,20 +21,11 @@
     <Filter Include="Файлы заголовков\CORE\HOOKS">
       <UniqueIdentifier>{37dd6d0c-0005-45cd-a676-6df91233311c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы ресурсов\minhook">
-      <UniqueIdentifier>{73bd8e9f-afe9-4cb2-9ef2-be3e4a6a4c41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы ресурсов\Custom">
-      <UniqueIdentifier>{93a0adb5-940b-4fba-ac7e-0aa28281e1d4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\CORE\INTERFACES">
       <UniqueIdentifier>{f6d352a7-decb-4e67-9f52-62949663e788}</UniqueIdentifier>
     </Filter>
     <Filter Include="Исходные файлы\CORE\INTERFACES">
       <UniqueIdentifier>{176a3eee-177d-40ad-96a9-b3f2fc390e6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы ресурсов\Math">
-      <UniqueIdentifier>{b3e688d2-0ab8-49ea-a2e0-0eb462436de9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Файлы заголовков\CORE\TOOLS">
       <UniqueIdentifier>{0772acc3-e5f5-4827-9a4a-7dc65b8f3414}</UniqueIdentifier>
@@ -46,20 +33,11 @@
     <Filter Include="Исходные файлы\CORE\TOOLS">
       <UniqueIdentifier>{473969d4-ee02-4b30-a874-8d6bf777d54f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\CORE\CLASES">
-      <UniqueIdentifier>{489bc7eb-1262-42e1-b1f4-6cfa6da4c04f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Исходные файлы\CORE\CLASES">
       <UniqueIdentifier>{68879030-525d-4e95-9d2d-4bf4b6a7be1a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Файлы заголовков\CORE\lua">
       <UniqueIdentifier>{14077082-7ee3-4749-ab29-8ba0d407e473}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы ресурсов\imgui">
-      <UniqueIdentifier>{a61dcf76-e92b-41bf-9c4f-dffc3901df11}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы ресурсов\MENU">
-      <UniqueIdentifier>{f48159e2-18d1-43ad-8935-c52753ee585f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Исходные файлы\HACKS">
       <UniqueIdentifier>{108b547a-63b8-4758-a57a-78caa93d9d6b}</UniqueIdentifier>
@@ -67,7 +45,38 @@
     <Filter Include="Файлы заголовков\HACKS">
       <UniqueIdentifier>{69f87e08-8a6d-4fc6-b413-07d081342bf3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы ресурсов\DRAW">
+    <Filter Include="Файлы заголовков\CORE\CLASES">
+      <UniqueIdentifier>{489bc7eb-1262-42e1-b1f4-6cfa6da4c04f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\CORE\CLASES\Entitys">
+      <UniqueIdentifier>{82cb12e4-eb19-43c7-9bcb-1abb88094856}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\CORE\CLASES\Material">
+      <UniqueIdentifier>{465cada9-48d5-4515-8f21-10da77f34416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\CORE\CLASES\Model">
+      <UniqueIdentifier>{ba5aa953-06cc-4892-ab1d-fd6ace0f7cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков\Файлы ресурсов\minhook">
+      <UniqueIdentifier>{73bd8e9f-afe9-4cb2-9ef2-be3e4a6a4c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Файлы ресурсов\Custom">
+      <UniqueIdentifier>{93a0adb5-940b-4fba-ac7e-0aa28281e1d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Файлы ресурсов\Math">
+      <UniqueIdentifier>{b3e688d2-0ab8-49ea-a2e0-0eb462436de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Файлы ресурсов\imgui">
+      <UniqueIdentifier>{a61dcf76-e92b-41bf-9c4f-dffc3901df11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Файлы ресурсов\MENU">
+      <UniqueIdentifier>{f48159e2-18d1-43ad-8935-c52753ee585f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Файлы ресурсов\DRAW">
       <UniqueIdentifier>{bcb2064e-18a6-4f1e-bdbc-a52873d57eec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -85,28 +94,28 @@
       <Filter>Файлы заголовков\CORE\HOOKS</Filter>
     </ClInclude>
     <ClInclude Include="minhook\MinHook.h">
-      <Filter>Файлы ресурсов\minhook</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\minhook</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleColor.h">
-      <Filter>Файлы ресурсов\Custom</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Custom</Filter>
     </ClInclude>
     <ClInclude Include="Interfaces.h">
       <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
     </ClInclude>
     <ClInclude Include="vector.h">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClInclude>
     <ClInclude Include="vector2d.h">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClInclude>
     <ClInclude Include="vector4d.h">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClInclude>
     <ClInclude Include="vertex.h">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClInclude>
     <ClInclude Include="VMatrix.h">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClInclude>
     <ClInclude Include="MemTools.h">
       <Filter>Файлы заголовков\CORE\TOOLS</Filter>
@@ -118,7 +127,7 @@
       <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
     </ClInclude>
     <ClInclude Include="QAngle.h">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClInclude>
     <ClInclude Include="IBaseClientDll.h">
       <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
@@ -139,7 +148,7 @@
       <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
     </ClInclude>
     <ClInclude Include="color.h">
-      <Filter>Файлы ресурсов\Custom</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Custom</Filter>
     </ClInclude>
     <ClInclude Include="IInputSystem.h">
       <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
@@ -166,31 +175,22 @@
       <Filter>Файлы заголовков\CORE\TOOLS</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">
-      <Filter>Файлы ресурсов\MENU</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\MENU</Filter>
     </ClInclude>
     <ClInclude Include="MenuThemes.h">
-      <Filter>Файлы ресурсов\MENU</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\MENU</Filter>
     </ClInclude>
     <ClInclude Include="CustomUIModules.h">
-      <Filter>Файлы ресурсов\MENU</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\MENU</Filter>
     </ClInclude>
     <ClInclude Include="GLOBALS.h">
       <Filter>Файлы заголовков\CORE</Filter>
-    </ClInclude>
-    <ClInclude Include="CBaseEntity.h">
-      <Filter>Файлы заголовков\CORE\CLASES</Filter>
     </ClInclude>
     <ClInclude Include="Netvars.h">
       <Filter>Файлы заголовков\CORE\TOOLS</Filter>
     </ClInclude>
     <ClInclude Include="fnv.h">
       <Filter>Файлы заголовков\CORE\TOOLS</Filter>
-    </ClInclude>
-    <ClInclude Include="BasePlayer.h">
-      <Filter>Файлы заголовков\CORE\CLASES</Filter>
-    </ClInclude>
-    <ClInclude Include="BannyHop.h">
-      <Filter>Файлы заголовков\HACKS</Filter>
     </ClInclude>
     <ClInclude Include="ESPBox.h">
       <Filter>Файлы заголовков\HACKS</Filter>
@@ -199,7 +199,7 @@
       <Filter>Файлы заголовков\CORE\TOOLS</Filter>
     </ClInclude>
     <ClInclude Include="ImGuiBaseDraw.h">
-      <Filter>Файлы ресурсов\DRAW</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\DRAW</Filter>
     </ClInclude>
     <ClInclude Include="LockCursorHook.h">
       <Filter>Файлы заголовков\CORE\HOOKS</Filter>
@@ -208,34 +208,34 @@
       <Filter>Файлы заголовков\HACKS</Filter>
     </ClInclude>
     <ClInclude Include="math.h">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui.h">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui_internal.h">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imstb_rectpack.h">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imstb_textedit.h">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imstb_truetype.h">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClInclude>
     <ClInclude Include="Render.h">
       <Filter>Файлы заголовков\CORE</Filter>
     </ClInclude>
     <ClInclude Include="imgui\impl\imgui_impl_dx9.h">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClInclude>
     <ClInclude Include="imgui\impl\imgui_impl_win32.h">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClInclude>
     <ClInclude Include="EngineTrace.h">
       <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
@@ -261,8 +261,53 @@
     <ClInclude Include="IPanel.h">
       <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
     </ClInclude>
+    <ClInclude Include="BunnyHop.h">
+      <Filter>Файлы заголовков\HACKS</Filter>
+    </ClInclude>
+    <ClInclude Include="FileTools.h">
+      <Filter>Файлы заголовков\CORE\TOOLS</Filter>
+    </ClInclude>
+    <ClInclude Include="IViewRender.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="IRandom.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="IMatrialSystem.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="BasePlayer.h">
+      <Filter>Файлы заголовков\CORE\CLASES\Entitys</Filter>
+    </ClInclude>
+    <ClInclude Include="CBaseEntity.h">
+      <Filter>Файлы заголовков\CORE\CLASES\Entitys</Filter>
+    </ClInclude>
     <ClInclude Include="CBaseWeapon.h">
-      <Filter>Файлы заголовков\CORE\CLASES</Filter>
+      <Filter>Файлы заголовков\CORE\CLASES\Entitys</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialSystemStuff.h">
+      <Filter>Файлы заголовков\CORE\CLASES\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadPixelsHook.h">
+      <Filter>Файлы заголовков\CORE\HOOKS</Filter>
+    </ClInclude>
+    <ClInclude Include="IMatRenderContext.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="IMaterial.h">
+      <Filter>Файлы заголовков\CORE\CLASES\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="IVModelRender.h">
+      <Filter>Файлы заголовков\CORE\INTERFACES</Filter>
+    </ClInclude>
+    <ClInclude Include="CModelInfo.h">
+      <Filter>Файлы заголовков\CORE\CLASES\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="checksum_md5.h">
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientViewRenderHook.h">
+      <Filter>Файлы заголовков\CORE\HOOKS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -279,16 +324,16 @@
       <Filter>Исходные файлы\CORE\INTERFACES</Filter>
     </ClCompile>
     <ClCompile Include="vector.cpp">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClCompile>
     <ClCompile Include="vector2d.cpp">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClCompile>
     <ClCompile Include="vector4d.cpp">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClCompile>
     <ClCompile Include="VMatrix.cpp">
-      <Filter>Файлы ресурсов\Math</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\Math</Filter>
     </ClCompile>
     <ClCompile Include="MemTools.cpp">
       <Filter>Исходные файлы\CORE\TOOLS</Filter>
@@ -321,25 +366,25 @@
       <Filter>Исходные файлы\HACKS</Filter>
     </ClCompile>
     <ClCompile Include="CustomUIModules.cpp">
-      <Filter>Файлы ресурсов\MENU</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\MENU</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_draw.cpp">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_widgets.cpp">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClCompile>
     <ClCompile Include="Render.cpp">
       <Filter>Исходные файлы\CORE</Filter>
     </ClCompile>
     <ClCompile Include="imgui\impl\imgui_impl_dx9.cpp">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClCompile>
     <ClCompile Include="imgui\impl\imgui_impl_win32.cpp">
-      <Filter>Файлы ресурсов\imgui</Filter>
+      <Filter>Файлы заголовков\Файлы ресурсов\imgui</Filter>
     </ClCompile>
     <ClCompile Include="RenderViewHook.cpp">
       <Filter>Исходные файлы\CORE\HOOKS</Filter>
@@ -348,6 +393,15 @@
       <Filter>Исходные файлы\HACKS</Filter>
     </ClCompile>
     <ClCompile Include="PaintTreverseHook.cpp">
+      <Filter>Исходные файлы\CORE\HOOKS</Filter>
+    </ClCompile>
+    <ClCompile Include="IMatrialSystem.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadPixelsHook.cpp">
+      <Filter>Исходные файлы\CORE\HOOKS</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientViewRenderHook.cpp">
       <Filter>Исходные файлы\CORE\HOOKS</Filter>
     </ClCompile>
   </ItemGroup>

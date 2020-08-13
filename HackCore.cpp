@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Interfaces.h"
 #include "HooksManager.h"
+#include "FileTools.h"
 
 bool HackCore::Unload(void* dll)
 {
@@ -18,6 +19,8 @@ bool HackCore::Init()
 	freopen("CONOUT$", "wb", stdout);
 	freopen("CONOUT$", "wb", stderr);
 	freopen("CONIN$", "rb", stdin);
+
+	//FileTools::CreateScriptsFolder();
 
 	if (!Interfaces::Get().Init())
 		printf("Interfaces load error!\n");

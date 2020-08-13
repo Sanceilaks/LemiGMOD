@@ -5,3 +5,5 @@
 #include "LockCursorHook.h"
 #include "RenderViewHook.h"
 #include "PaintTreverseHook.h"
+#include "ReadPixelsHook.h"
+#include "ClientViewRenderHook.h"

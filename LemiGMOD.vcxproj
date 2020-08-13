@@ -87,9 +87,10 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;LEMIGMOD_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING;WIN32;_DEBUG;LEMIGMOD_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -104,9 +105,10 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;LEMIGMOD_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING;_DEBUG;LEMIGMOD_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -123,9 +125,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;LEMIGMOD_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING;WIN32;NDEBUG;LEMIGMOD_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,9 +148,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;LEMIGMOD_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING;NDEBUG;LEMIGMOD_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -160,11 +166,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AimBot.h" />
-    <ClInclude Include="BannyHop.h" />
+    <ClInclude Include="BunnyHop.h" />
     <ClInclude Include="BasePlayer.h" />
     <ClInclude Include="CBaseEntity.h" />
     <ClInclude Include="CBaseWeapon.h" />
     <ClInclude Include="CClientClass.h" />
+    <ClInclude Include="checksum_md5.h" />
+    <ClInclude Include="ClientViewRenderHook.h" />
+    <ClInclude Include="CModelInfo.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="CreateMoveHook.h" />
     <ClInclude Include="CUserCmd.h" />
@@ -174,12 +183,16 @@
     <ClInclude Include="EndScaneHook.h" />
     <ClInclude Include="EngineTrace.h" />
     <ClInclude Include="ESPBox.h" />
+    <ClInclude Include="FileTools.h" />
     <ClInclude Include="fnv.h" />
     <ClInclude Include="GameTools.h" />
     <ClInclude Include="GLOBALS.h" />
     <ClInclude Include="hi.h" />
     <ClInclude Include="IClientMode.h" />
     <ClInclude Include="IInputSystem.h" />
+    <ClInclude Include="IMaterial.h" />
+    <ClInclude Include="IMatRenderContext.h" />
+    <ClInclude Include="IMatrialSystem.h" />
     <ClInclude Include="ImGuiBaseDraw.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -190,6 +203,7 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="IPanel.h" />
+    <ClInclude Include="IRandom.h" />
     <ClInclude Include="ISurface.h" />
     <ClInclude Include="IVClientEntityList.h" />
     <ClInclude Include="ConsoleColor.h" />
@@ -200,8 +214,11 @@
     <ClInclude Include="iinclude.h" />
     <ClInclude Include="Interfaces.h" />
     <ClInclude Include="IVEngineClient.h" />
+    <ClInclude Include="IViewRender.h" />
+    <ClInclude Include="IVModelRender.h" />
     <ClInclude Include="LockCursorHook.h" />
     <ClInclude Include="LUA.h" />
+    <ClInclude Include="MaterialSystemStuff.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="MemTools.h" />
     <ClInclude Include="menu.h" />
@@ -211,6 +228,7 @@
     <ClInclude Include="OtherVisual.h" />
     <ClInclude Include="PaintTreverseHook.h" />
     <ClInclude Include="QAngle.h" />
+    <ClInclude Include="ReadPixelsHook.h" />
     <ClInclude Include="RecvProps.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="RenderView.h" />
@@ -227,6 +245,7 @@
   <ItemGroup>
     <ClCompile Include="AimBot.cpp" />
     <ClCompile Include="BannyHop.cpp" />
+    <ClCompile Include="ClientViewRenderHook.cpp" />
     <ClCompile Include="CreateMoveHook.cpp" />
     <ClCompile Include="CustomUIModules.cpp" />
     <ClCompile Include="dllmain.cpp" />
@@ -235,6 +254,7 @@
     <ClCompile Include="GLOBALS.cpp" />
     <ClCompile Include="HackCore.cpp" />
     <ClCompile Include="HooksManager.cpp" />
+    <ClCompile Include="IMatrialSystem.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
@@ -246,6 +266,7 @@
     <ClCompile Include="Netvars.cpp" />
     <ClCompile Include="OtherVisual.cpp" />
     <ClCompile Include="PaintTreverseHook.cpp" />
+    <ClCompile Include="ReadPixelsHook.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="RenderViewHook.cpp" />
     <ClCompile Include="ResetHook.cpp" />

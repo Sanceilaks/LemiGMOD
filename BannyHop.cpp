@@ -1,11 +1,11 @@
-#include "BannyHop.h"
+#include "BunnyHop.h"
 #include "Settings.h"
 #include "BasePlayer.h"
 
 #define	FL_ONGROUND				(1<<0)
 
 
-void BannyHop::DoBhop(CUserCmd* UCMD)
+void BunnyHop::DoBhop(CUserCmd* UCMD)
 {
 	if (CoreSettings::Get().GetHackSettings()->BHOP->isActive)
 	{

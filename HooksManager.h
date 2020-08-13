@@ -3,9 +3,13 @@
 #include "CUserCmd.h"
 #include <d3d9.h>
 #include "ISurface.h"
-#include "RenderView.h"
+#include "IViewRender.h"
 #include "CViewSetup.h"
 #include "IPanel.h"
+#include "IMatRenderContext.h"
+#include "math.h"
+#include "IBaseClientDll.h"
+
 
 namespace Hooks
 {
@@ -33,8 +37,8 @@ namespace Hooks
 
 	namespace RenderViewFn
 	{
-		using func = void(__thiscall*)(IRenderView*, CViewSetup&, int, int);
-		static void __stdcall hook(CViewSetup& view, int nClearFlags, int whatToDraw);
+		using func = void(__thiscall*)(IViewRender*, CViewSetup&, int, int);
+		static void __fastcall hook(IViewRender* ViewRender, void* edx, CViewSetup& view, int nClearFlags, int whatToDraw);
 	};
 
 	namespace PaintTreverseFn
@@ -42,6 +46,18 @@ namespace Hooks
 		using func = void(__thiscall*)(IPanel*, unsigned int, bool, bool);
 		static void __fastcall hook(IPanel* p_panel, void*, unsigned int panel, bool force_repaint, bool allow_force);
 	};
+
+	namespace ReadPixelsFn
+	{
+		using func = void(__thiscall*)(IMatRenderContext*, int, int, int, int, unsigned char*, int);
+		static void __fastcall hook(IMatRenderContext* self, uintptr_t edx, int x, int y, int w, int h, uint8_t* data, int dst);
+	};
+
+	namespace ClientViewRenderFn
+	{
+		using func = void(__thiscall*)(IBaseClientDll*, vrect_t*);
+		static void __fastcall hook(IBaseClientDll* client, void* edx, vrect_t* rect);
+	}
 }
 
 
@@ -57,6 +73,8 @@ public:
 	Hooks::LockCursor::func LockCursorOriginal = nullptr;
 	Hooks::RenderViewFn::func RenderViewOriginal = nullptr;
 	Hooks::PaintTreverseFn::func PaintTreverseOriginal = nullptr;
+	Hooks::ReadPixelsFn::func ReadPixelsOriginal = nullptr;
+	Hooks::ClientViewRenderFn::func ClientViewRenderOriginal = nullptr;
 
 	void UnhookAll();
 	bool Init();

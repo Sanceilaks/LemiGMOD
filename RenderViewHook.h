@@ -3,5 +3,5 @@
 
 namespace MyHooks
 {
-	CViewSetup __stdcall RenderView(CViewSetup& view, int nClearFlags, int whatToDraw);
+	void __fastcall RenderView(CViewSetup& view, int nClearFlags, int whatToDraw);
 }

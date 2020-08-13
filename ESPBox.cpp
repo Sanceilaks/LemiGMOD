@@ -6,9 +6,6 @@
 #include "ImGuiBaseDraw.h"
 #include "color.h"
 
-#pragma warning( push )
-#pragma warning( disable : 4244) //4244
-
 
 void ESPBox::Render()
 {
@@ -26,10 +23,10 @@ void ESPBox::Render()
 		auto h_ = fabs(head.y - feet.y);
 		auto w_ = h_ / 2.0f;
 
-		ret.left = (int)(feet.x - w_ * 0.5f);
-		ret.right = (int)(ret.left + w_);
-		ret.bottom = (feet.y > head.y ? (int)(feet.y) : (int)(head.y));
-		ret.top = (feet.y > head.y ? (int)(head.y) : (int)(feet.y));
+		ret.left = (feet.x - w_ * 0.5f);
+		ret.right = ((LONG)ret.left + (LONG)w_);
+		ret.bottom = ((LONG)feet.y > (LONG)head.y ? (LONG)(feet.y) : (LONG)(head.y));
+		ret.top = ((LONG)feet.y > (LONG)head.y ? (LONG)(head.y) : (LONG)(feet.y));
 
 		return ret;
 	};
@@ -56,7 +53,10 @@ void ESPBox::Render()
 			auto Box = get_box(vScreenOrigin, vScreenHead);
 
 			//if (CoreSettings::Get().GetHackSettings()->VISUAL->Dtype == imgui)
-				DXDraw::RenderOutlinedRect(Box.left, Box.top, Box.right, Box.bottom, CColor(CoreSettings::Get().GetHackSettings()->ESP->BoxColor));
+			auto color = GameTools::IsVisible(CBasePlayer::GetLocalPlayer()->GetEyePosition(), ent->GetEyePosition(), ent)
+				? CoreSettings::Get().GetHackSettings()->ESP->VBoxColor
+				: CoreSettings::Get().GetHackSettings()->ESP->IBoxColor;
+			DXDraw::RenderOutlinedRect((LONG)Box.left, (LONG)Box.top, (LONG)Box.right, (LONG)Box.bottom, CColor(color));
 			//else
 			//{
 			//	auto color = D3DCOLOR_RGBA(CoreSettings::Get().GetHackSettings()->ESP->BoxColor[0], CoreSettings::Get().GetHackSettings()->ESP->BoxColor[1], CoreSettings::Get().GetHackSettings()->ESP->BoxColor, 255)
@@ -69,7 +69,7 @@ void ESPBox::Render()
 				float CurHealth = ent->GetHealth();
 				float maxHp = ent->GetMaxHealth();
 				//if (CoreSettings::Get().GetHackSettings()->VISUAL->Dtype == imgui)
-					DXDraw::RenderRectFilled(Box.left - 6, Box.top, Box.left - 3, Box.bottom, CColor(0.f, 0.f, 0.f), 5, 0);
+				DXDraw::RenderRectFilled(Box.left - 6, Box.top, Box.left - 3, Box.bottom, CColor(0.f, 0.f, 0.f), 5, 0);
 				//else
 				//	DXRender::Get().RenderFilledBox(Vec2(Box.left - 6, Box.top), Box.right - (Box.left - 3), Box.bottom - Box.top, D3DCOLOR(0.f, 0.f, 0.f))
 
@@ -86,5 +86,3 @@ void ESPBox::Render()
 	if (CoreSettings::Get().GetHackSettings()->VISUAL->Dtype == dx)
 		DXRender::Get().End();
 }
-
-#pragma warning( pop )

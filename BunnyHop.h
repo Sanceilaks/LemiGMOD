@@ -3,7 +3,7 @@
 #include "CUserCmd.h"
 
 
-class BannyHop : public Singleton<BannyHop>
+class BunnyHop : public Singleton<BunnyHop>
 {
 public:
 	void DoBhop(CUserCmd* UCMD);
