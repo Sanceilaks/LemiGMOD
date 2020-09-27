@@ -7,6 +7,7 @@
 #include "Settings.h"
 #include "OtherVisual.h"
 
+
 #pragma warning( push )
 #pragma warning( disable : 4244) //4244
 
@@ -48,21 +49,26 @@ void Render::Init(IDirect3DDevice9* GameDevice)
 	this->DrawList = new ImDrawList(ImGui::GetDrawListSharedData());
 	this->DrawListActualy = new ImDrawList(ImGui::GetDrawListSharedData());
 	this->DrawListRender = new ImDrawList(ImGui::GetDrawListSharedData());
+
+	DXRender::Get().Init(GameDevice);
 }
 
 
 void Render::NewFrame(IDirect3DDevice9* device)
 {
+	DXRender::Get().Render();
+
+
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
+	
 
 	this->BeginScene();
 
 	if (G::Get().GetMenuVars()->MenuIsOpen)
 		Menu::Draw();
 
-	DXRender::Get().Render(device);
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 }
@@ -77,8 +83,8 @@ void Render::ClearDrawList()
 
 void Render::BeginScene()
 {
-	ESPBox::Get().Render();
 	Visual::Get().DrawFovCricle();
+	Visual::Get().Test();
 
 	//if (GetAsyncKeyState(G::Get().GetOthervars()->isAiming))		TODO: FIX
 	//	AimBot::Get().DrawTarget();
@@ -93,38 +99,48 @@ ImDrawList* Render::RenderScene()
 	//}
 	return this->DrawList;
 }
+#pragma warning( pop )
 
-void DXRender::RenderBorderedBox(Vec2 pos, int w, int h, int thickness, D3DCOLOR color)
+void DXRender::RenderFilledRect(int x, int y, int w, int h, const CColor& color)
 {
-	DrawCall call;
-	call.type = borderedbox;
-
-	call.drawCallBorderedBox.w = w;
-	call.drawCallBorderedBox.h = h;
-	call.drawCallBorderedBox.color = color;
-	call.drawCallBorderedBox.origin = pos;
-	call.drawCallBorderedBox.thickness = thickness;
-
-	drawCalls.push_back(call);
+	D3DRECT rect = { x, y, x + w, y + h };
+	this->pDevice->Clear(1, &rect, D3DCLEAR_TARGET, GetDrawColor(color), 0, 0);
 }
 
-void DXRender::RenderFilledBox(Vec2 pos, int w, int h, D3DCOLOR color)
+void DXRender::RenderBorderBox(int x, int y, int w, int h, int border_w, const CColor& color)
 {
-	DrawCall call;
-	call.type = filledbox;
+	RenderFilledRect(x, y, w, border_w, color);
+	RenderFilledRect(x, y, border_w, h, color);
+	RenderFilledRect(x + w, y, border_w, h, color);
+	RenderFilledRect(x, y + h, w + border_w, border_w, color);
+}
 
+void DXRender::RenderLine(int x1, int y1, int x2, int y2, int line_w, const CColor& color)
+{
+	ID3DXLine* DLine;
+	D3DXCreateLine(this->pDevice, &DLine);
 
-	call.drawCallFilledBox.w = w;
-	call.drawCallFilledBox.h = h;
-	call.drawCallFilledBox.color = color;
-	call.drawCallFilledBox.origin = pos;
+	D3DXVECTOR2 Line[2];
+	Line[0] = D3DXVECTOR2(x1, y1);
+	Line[1] = D3DXVECTOR2(x2, y2);
+	DLine->SetWidth(line_w);
+	DLine->Draw(Line, 2, GetDrawColor(color));
+	DLine->Release();
+}
 
-	drawCalls.push_back(call);
+void DXRender::RenderText(int x, int y, const std::string& str, const CColor& color, LPD3DXFONT font)
+{
+	RECT rect = { x, y, x + 120, y + 15 };
+
+	if (font == NULL)
+		font = DefaultFont[16];
+
+	font->DrawTextA(NULL, str.c_str(), -1, &rect, DT_NOCLIP, GetDrawColor(color));
 }
 
 void DXRender::Begin()
 {
-	drawCalls.clear();
+	this->drawCalls.clear();
 }
 
 void DXRender::End()
@@ -133,57 +149,111 @@ void DXRender::End()
 	drawCalls.swap(safeCalls);
 }
 
-inline void FilledBox(IDirect3DDevice9* device, int x, int y, int w, int h, D3DCOLOR color)
+void DXRender::Init(IDirect3DDevice9* pDev)
 {
-	SD3DVertex pVertex[4] = { {x, y + h, 0.0f, 1.0f, color}, {x, y, 0.0f, 1.0f, color}, {x + w, y + h, 0.0f, 1.0f, color}, {x + w, y, 0.0f, 1.0f, color} };
-	device->SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
-	device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(SD3DVertex));
+	this->pDevice = pDev;
+
+	CreateDrawFont(100, "Arial", this->DefaultFont);
 }
 
-inline void BorderedBox(IDirect3DDevice9* device, int x, int y, int w, int h, int thikness, D3DCOLOR color)
+DWORD DXRender::GetDrawColor(CColor color) const
 {
-	FilledBox(device, x, y, w, thikness, color);
-	FilledBox(device, x, y, thikness, h, color);
-	FilledBox(device, x + w - thikness, y, thikness, h, color);
-	FilledBox(device, x, y + h - thikness, w, thikness, color);
+	return D3DCOLOR_ARGB(color.a(), color.r(), color.g(), color.b());
 }
 
-//inline void FilledBox(IDirect3DDevice9* device, int x1, int y1, int x2, int y2, D3DCOLOR color)
-//{
-//	int x = x1, y = y1, w = x2 - x1, h = y2 - y1;
-//	SD3DVertex pVertex[4] = { {x, y + h, 0.0f, 1.0f, color}, {x, y, 0.0f, 1.0f, color}, {x + w, y + h, 0.0f, 1.0f, color}, {x + w, y, 0.0f, 1.0f, color} };
-//	device->SetFVF(D3DFVF_XYZRHW | D3DFVF_DIFFUSE);
-//	device->DrawPrimitiveUP(D3DPT_TRIANGLESTRIP, 2, pVertex, sizeof(SD3DVertex));
-//}
-//
-//inline void BorderedBox(IDirect3DDevice9* device, int x1, int y1, int x2, int y2, int thikness, D3DCOLOR color)
-//{
-//	FilledBox(device, x1, y1, x2, y2, thikness, color);
-//	FilledBox(device, x1, y1, x2 , y2 thikness, h, color);
-//	FilledBox(device, x + w - thikness, y, thikness, h, color);
-//	FilledBox(device, x, y + h - thikness, w, thikness, color);
-//}
+void DXRender::DrawFilledRect(int x, int y, int w, int h, CColor color)
+{
+	DrawCall call;
+	call.type = filledbox;
+
+	call.drawCallFilledBox.x = x;
+	call.drawCallFilledBox.y = y;
+	call.drawCallFilledBox.w = w;
+	call.drawCallFilledBox.h = h;
+	call.drawCallFilledBox.color = color;
+	drawCalls.push_back(call);
+}
+
+void DXRender::DrawBorderBox(int x, int y, int w, int h, int border_w, CColor color)
+{
+	DrawCall call;
+	call.type = borderedbox;
+
+	call.drawCallBorderedBox.x = x;
+	call.drawCallBorderedBox.y = y;
+	call.drawCallBorderedBox.w = w;
+	call.drawCallBorderedBox.h = h;
+	call.drawCallBorderedBox.color = color;
+	call.drawCallBorderedBox.border_w = border_w;
+	drawCalls.push_back(call);
+}
+
+void DXRender::DrawLine(int x1, int y1, int x2, int y2, int line_w, CColor color)
+{
+	DrawCall call;
+	call.type = line;
+
+	call.drawCallLine.x1 = x1;
+	call.drawCallLine.x2 = x2;
+	call.drawCallLine.y1 = y1;
+	call.drawCallLine.y2 = y2;
+	call.drawCallLine.line_w = line_w;
+	call.drawCallLine.color = color;
+	drawCalls.push_back(call);
+}
+
+void DXRender::DrawString(int x, int y, const std::string& str, const CColor& color, LPD3DXFONT font)
+{
+	DrawCall call;
+	call.type = text;
+
+	call.drawCallText.x = x;
+	call.drawCallText.y = y;
+	call.drawCallText.str = str;
+	call.drawCallText.color = color;
+	call.drawCallText.font = font;
+	drawCalls.push_back(call);
+}
 
 
-void DXRender::Render(IDirect3DDevice9* device)
+void DXRender::Render()
 {
 	std::unique_lock<std::shared_mutex> lock(mutex);
 
-	for (DrawCall & call : safeCalls)
+	for (DrawCall& call : safeCalls)
 	{
 		switch (call.type)
 		{
 		case none:
 			break;
 		case filledbox:
-			FilledBox(device, call.drawCallFilledBox.origin.x, call.drawCallFilledBox.origin.y, call.drawCallFilledBox.w, call.drawCallFilledBox.h, call.drawCallFilledBox.color);
+			RenderFilledRect(call.drawCallFilledBox.x, call.drawCallFilledBox.y, call.drawCallFilledBox.w, call.drawCallFilledBox.h, call.drawCallFilledBox.color);
 			break;
 		case borderedbox:
-			BorderedBox(device, call.drawCallBorderedBox.origin.x, call.drawCallBorderedBox.origin.y, call.drawCallBorderedBox.w, call.drawCallBorderedBox.h, call.drawCallBorderedBox.thickness, call.drawCallBorderedBox.color);
+			RenderBorderBox(call.drawCallBorderedBox.x, call.drawCallBorderedBox.y, call.drawCallBorderedBox.w, call.drawCallBorderedBox.h, call.drawCallBorderedBox.border_w, call.drawCallBorderedBox.color);
+			break;
+		case line:
+			RenderLine(call.drawCallLine.x1, call.drawCallLine.y1, call.drawCallLine.x2, call.drawCallLine.y2, call.drawCallLine.line_w, call.drawCallLine.color);
+			break;
+		case text:
+			RenderText(call.drawCallText.x, call.drawCallText.y, call.drawCallText.str, call.drawCallText.color, call.drawCallText.font);
 			break;
 		default:
 			break;
 		}
 	}
 }
-#pragma warning( pop )
+
+void DXRender::CreateDrawFont(int max_size, const char* font, std::vector<LPD3DXFONT>& out)
+{
+	std::vector<LPD3DXFONT> ret;
+
+	for (int i = 1; i <= max_size; ++i)
+	{
+		LPD3DXFONT tmpFont;
+		D3DXCreateFontA(this->pDevice, i, 0, FW_NORMAL, 0, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, font, &tmpFont);
+		ret.push_back(tmpFont);
+	}
+
+	out = ret;
+}

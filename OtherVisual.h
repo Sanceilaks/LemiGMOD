@@ -5,4 +5,5 @@ class Visual : public Singleton<Visual>
 {
 public:
 	void DrawFovCricle();
+	void Test();
 };

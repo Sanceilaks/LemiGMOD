@@ -7,6 +7,13 @@
 #include "VMatrix.h"
 #include "LUA.h"
 
+class CCollideable
+{
+public:
+	virtual void unknown_0() = 0;
+	virtual Math::CVector& mins() = 0;
+	virtual Math::CVector& maxs() = 0;
+};
 
 class CBaseEntity
 {
@@ -23,6 +30,12 @@ public:
 		return (Y*)((DWORD)this + offset);
 	}
 
+	CCollideable* Collideable()
+	{
+		using original_fn = CCollideable * (__thiscall*)(void*);
+		return (*(original_fn**)this)[3](this);
+	}
+
 	void* Renderable()
 	{
 		return reinterpret_cast<void*>(uintptr_t(this) + 0x4);
@@ -36,19 +49,21 @@ public:
 	int index() 
 	{
 		using original_fn = int(__thiscall*)(void*);
-		return (*(original_fn**)Networkable())[10](Networkable());
-	}
-	int isDormant() 
-	{
-		using original_fn = bool(__thiscall*)(void*);
 		return (*(original_fn**)Networkable())[9](Networkable());
 	}
+
+	bool isDormant() 
+	{
+		using original_fn = bool(__thiscall*)(void*);
+		return (*(original_fn**)Networkable())[8](Networkable());
+	}
+
 	ClientClass* GetClientClass()
 	{
 		using original_fn = ClientClass * (__thiscall*)(void*);
 		return (*(original_fn**)Networkable())[3](Networkable());
 	}
-	const char* GetClassName()
+	const char* GetGMClassName()
 	{
 		using orig_fn = const char* (__thiscall*)(void*);
 		return (*(orig_fn**)Networkable())[2](Networkable());
@@ -96,7 +111,7 @@ public:
 
 	inline bool isNPC()
 	{
-		return std::memcmp(this->GetClassNameA(), "npc", 3);
+		return std::memcmp(this->GetGMClassName(), "npc", 3);
 	}
 
 	void DrawModel(int flags)

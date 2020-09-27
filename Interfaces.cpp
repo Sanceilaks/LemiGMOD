@@ -40,6 +40,8 @@ bool Interfaces::Init()
 	if (RandomSeed)
 		this->Random = **(CUniformRandomStream***)((uintptr_t)RandomSeed + 0x5);
 
+	LuaLoad::Get().Init();
+
 	this->isInit = true;
 	return this->isInit;
 }

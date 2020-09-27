@@ -117,6 +117,9 @@ namespace Math
 
 		vec_t	NormalizeInPlace();
 		CVector	Normalized() const;
+		void Clamp();
+		CVector Clamped() const;
+
 		bool	IsLengthGreaterThan(float val) const;
 		bool	IsLengthLessThan(float val) const;
 

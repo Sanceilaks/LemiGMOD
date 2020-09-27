@@ -30,7 +30,7 @@ CBasePlayer* AimBot::GetClosestEnemy(CUserCmd* UCMD)
 		CBasePlayer* ent = (CBasePlayer*)Interfaces::Get().EntityList->GetEntityByIndex(i);
 
 		if (!ent) continue;
-		if (ent->GetHealth() <= 0 || ent == CBasePlayer::GetLocalPlayer() || !ent->isDormant()) continue;
+		if (ent->GetHealth() <= 0 || ent == CBasePlayer::GetLocalPlayer() || ent->isDormant()) continue;
 
 		if (CoreSettings::Get().GetHackSettings()->AIM->OnlyVisible)
 			if (!GameTools::IsVisible(LocalPlayer->GetEyePosition(), ent->GetEyePosition(), ent))
@@ -60,6 +60,11 @@ CBasePlayer* AimBot::GetClosestEnemy(CUserCmd* UCMD)
 	return (CBasePlayer*)Interfaces::Get().EntityList->GetEntityByIndex(closestdistindex);
 }
 
+void smooth(Math::QAngle& view_angel, Math::QAngle& angel, float value)
+{
+	angel = (view_angel + (angel - view_angel).Clamped() / value).Clamped();
+}
+
 bool AimBot::DoAim(CUserCmd* UCMD)
 {
 	if (!CoreSettings::Get().GetHackSettings()->AIM->isActive) return false;
@@ -71,14 +76,20 @@ bool AimBot::DoAim(CUserCmd* UCMD)
 	if (!LocalPlayer || LocalPlayer->GetHealth() <= 0) return false;
 
 	Math::QAngle ang = UCMD->ViewAngles;
+	Math::QAngle viewangel = UCMD->ViewAngles;
+
 	ang = GameTools::CalcAngle(LocalPlayer->GetEyePosition(), GameTools::GetEntityBone(enemy, ECSPlayerBones::head_0));
 
-	ang = ang + SpreadAngle(UCMD);
+	if (CoreSettings::Get().GetHackSettings()->AIM->Recoil)
+		ang += SpreadAngle(UCMD);
+
+	if (CoreSettings::Get().GetHackSettings()->AIM->Legit)
+		smooth(viewangel, ang, CoreSettings::Get().GetHackSettings()->AIM->Smooth);
+
 
 	if (!CoreSettings::Get().GetHackSettings()->AIM->isSilent)
 		Interfaces::Get().Engine->SetViewAngles(ang);
-	else
-		UCMD->ViewAngles = ang;
+	UCMD->ViewAngles = ang;
 
 	if (CoreSettings::Get().GetHackSettings()->AIM->AutoFire)
 		if (GameTools::IsVisible(LocalPlayer->GetEyePosition(), enemy->GetEyePosition(), enemy))
@@ -103,7 +114,7 @@ void AimBot::DrawTarget()
 	Math::CVector vScreenHead;
 
 	if (GameTools::WorldToScreen(vHead, vScreenHead))
-			DXDraw::RenderOutlinedCricle(vScreenHead.x, vScreenHead.y, 10, CColor(50, 10, 60));
+			IMDraw::RenderOutlinedCricle(vScreenHead.x, vScreenHead.y, 10, CColor(50, 10, 60));
 }
 
 Math::QAngle AimBot::SpreadAngle(CUserCmd* UCMD)

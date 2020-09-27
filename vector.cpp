@@ -68,6 +68,32 @@ namespace Math
 		}
 		return res;
 	}
+
+	void CVector::Clamp()
+	{
+		while (this->x < -180.0f)
+			this->x += 360.0f;
+		while (this->x > 180.0f)
+			this->x -= 360.0f;
+		if (this->x > 89.0f)
+			this->x = 89.0f;
+		if (this->x < -89.0f)
+			this->x = -89.0f;
+		while (this->y < -180.0f)
+			this->y += 360.0f;
+		while (this->y > 180.0f)
+			this->y -= 360.0f;
+
+		this->z = 0.0f;
+	}
+
+	CVector CVector::Clamped() const
+	{
+		CVector ret = *this;
+		ret.Clamp();
+		return ret;
+	}
+
 	vec_t CVector::NormalizeInPlace() {
 		return NormalizeCVector(*this);
 	}

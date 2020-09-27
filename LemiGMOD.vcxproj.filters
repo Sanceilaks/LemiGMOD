@@ -309,6 +309,9 @@
     <ClInclude Include="ClientViewRenderHook.h">
       <Filter>Файлы заголовков\CORE\HOOKS</Filter>
     </ClInclude>
+    <ClInclude Include="LuaLoad.h">
+      <Filter>Файлы заголовков\HACKS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -395,14 +398,17 @@
     <ClCompile Include="PaintTreverseHook.cpp">
       <Filter>Исходные файлы\CORE\HOOKS</Filter>
     </ClCompile>
-    <ClCompile Include="IMatrialSystem.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="ReadPixelsHook.cpp">
       <Filter>Исходные файлы\CORE\HOOKS</Filter>
     </ClCompile>
     <ClCompile Include="ClientViewRenderHook.cpp">
       <Filter>Исходные файлы\CORE\HOOKS</Filter>
+    </ClCompile>
+    <ClCompile Include="IMatrialSystem.cpp">
+      <Filter>Исходные файлы\CORE\INTERFACES</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaLoad.cpp">
+      <Filter>Исходные файлы\HACKS</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

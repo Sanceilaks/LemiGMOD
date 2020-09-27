@@ -81,13 +81,13 @@ public:
 		Lua->GetField(-1, "Spread");
 		if (!Lua->IsType(-1, 3))  //3 == num
 		{
-			std::cout << "Pop 3" << std::endl;
+			//std::cout << "Pop 3" << std::endl;
 			Lua->Pop(3);
 			return -1.0f;
 		}
 		double out = Lua->GetNumber(-1);
 		Lua->Pop(3);
-		return out;
+		return (float)out;
 	}
 
 	float TTTSpread()
@@ -112,7 +112,7 @@ public:
 		}
 		double out = Lua->GetNumber(-1);
 		Lua->Pop(3);
-		return out;
+		return (float)out;
 	}
 
 	float LUASpread2()
@@ -130,7 +130,7 @@ public:
 		}
 		double out = Lua->GetNumber(-1);
 		Lua->Pop(2);
-		return out;
+		return (float)out;
 	}
 
 	const char* GetWeaponBase()

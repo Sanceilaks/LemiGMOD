@@ -2,7 +2,7 @@
 #include "Singleton.h"
 #include "iinclude.h"
 #include <d3d9.h>
-
+#include "LuaLoad.h"
 
 class Interfaces : public Singleton<Interfaces>
 {

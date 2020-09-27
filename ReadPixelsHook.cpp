@@ -1,12 +1,6 @@
 #include "ReadPixelsHook.h"
 #include "MemTools.h"
 #include <intrin.h>
-#pragma intrinsic(_ReturnAddress)
-
-
-//Not work(
-
-
 
 
 

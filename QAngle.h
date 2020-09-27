@@ -79,5 +79,6 @@ namespace Math
 		ClampAngles(angles);
 		return angles;
 	}
+
 }
 #pragma warning( pop )

@@ -52,6 +52,7 @@ struct EspSettings
 {
 public:
 	bool IsActive = true;
+	bool DrawName = true;
 	bool DrawHealth = true;
 	int MaxEspDistance = 1000;
 	float VBoxColor[3] = { 0, 255, 0};
@@ -66,10 +67,15 @@ public:
 	bool AutoFire = true;
 	bool OnlyVisible = true;
 	bool DrawFov = false;
+	bool Recoil = false;
+	bool Legit = false;
+
 	int AimKey = 18;
 	int MaxAimDistance = 750.0f;
 	int AimFov = 30;
 	int AimType = FOV;
+	int Smooth = 1.0f;
+
 };
 struct HackSettings
 {

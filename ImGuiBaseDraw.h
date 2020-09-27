@@ -21,7 +21,7 @@ namespace ImGuiHelp
 }
 
 
-namespace DXDraw
+namespace IMDraw
 		{
 			//Цисует разные штуки (асг на минималках)
 	__forceinline void RenderLine(float x1, float y1, float x2, float y2, CColor col)

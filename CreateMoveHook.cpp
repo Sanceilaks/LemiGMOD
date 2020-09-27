@@ -17,20 +17,22 @@ bool __fastcall MyHooks::MyCreateMoveHook(void* ecx, void* edx, int FrameTime, C
 
 	BunnyHop::Get().DoBhop(UCMD);
 
-
-	if (UCMD->Buttons & IN_ATTACK && !GameTools::isHoldingTool())
-	{
-		//std::cout << "Anti spread start!" << std::endl;
-		Math::QAngle spread = AimBot::Get().SpreadAngle(UCMD);
-		UCMD->ViewAngles += spread;
-		//std::cout << "Anti spread end!" << std::endl;
-	}
-
 	if (GetAsyncKeyState(CoreSettings::Get().GetHackSettings()->AIM->AimKey))
 		if (!AimBot::Get().DoAim(UCMD))
 			G::Get().GetOthervars()->isAiming = false;
-	else
-		G::Get().GetOthervars()->isAiming = false;
+		else
+			G::Get().GetOthervars()->isAiming = false;
+
+	//if (UCMD->Buttons & IN_ATTACK && !GameTools::isHoldingTool())
+	//{
+	//	//std::cout << "Anti spread start!" << std::endl;
+	//	Math::QAngle spread = AimBot::Get().SpreadAngle(UCMD);
+	//	UCMD->ViewAngles += spread;
+	//	Interfaces::Get().Engine->SetViewAngles(UCMD->ViewAngles);
+	//	//std::cout << "Anti spread end!" << std::endl;
+	//}
+
+	GameTools::CorrectMovement(UCMD, oldView);
 
 	if (G::Get().GetMenuVars()->MenuIsOpen)
 		UCMD->Buttons &= ~IN_ATTACK;

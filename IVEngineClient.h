@@ -7,6 +7,22 @@
 #pragma warning( push )
 #pragma warning( disable : 4244) //4244
 
+//struct player_info_t
+//{
+//	char name[32];
+//	int  id;
+//	char guid[33];
+//	struct
+//	{
+//		uint32_t id;
+//		char name[32];
+//	} buddy;
+//	bool bot;
+//	bool hltv;
+//	uint32_t files[4];
+//	uint8_t  downloaded;
+//};
+
 struct player_info_t
 {
 	char name[32];
@@ -14,13 +30,13 @@ struct player_info_t
 	char guid[33];
 	struct
 	{
-		uint32_t id;
+		unsigned int id;
 		char name[32];
 	} buddy;
 	bool bot;
 	bool hltv;
-	uint32_t files[4];
-	uint8_t  downloaded;
+	unsigned int files[4];
+	unsigned char downloaded;
 };
 
 class IVEngineClient

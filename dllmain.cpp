@@ -4,6 +4,9 @@
 void HackStart(void* dll)
 {
     HackCore::Get().Init();
+    
+    //Interfaces::Get().LuaShared->CreateInterface()->GetLuaState()
+
 }
 
 

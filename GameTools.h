@@ -30,7 +30,7 @@ enum ECSPlayerBones {
 class GameTools
 {
 public:
-	static Math::CVector GetEntityBone(CBaseEntity* pEntity, ECSPlayerBones Bone)
+	static Math::CVector GetEntityBone(CBaseEntity* pEntity, int Bone)
 	{
 		Math::matrix3x4_t boneMatrix[128];
 
@@ -227,7 +227,7 @@ public:
 		if (!ActiveWeapon)
 			return false;
 
-		char const* name = ActiveWeapon->GetClassNameA();
+		char const* name = ActiveWeapon->GetGMClassName();
 		if (!name)
 			return false;
 		/*

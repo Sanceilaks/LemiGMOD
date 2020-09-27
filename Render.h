@@ -7,7 +7,9 @@
 #include <mutex>
 #include <shared_mutex>
 #include <vector>
-#include <d3d9.h>
+#include <string>
+#include "color.h"
+#include <d3dx9.h>
 
 #pragma warning( push )
 #pragma warning( disable : 4244) //4244
@@ -34,61 +36,92 @@ public:
 	void Init(IDirect3DDevice9* GameDevice);
 };
 
-
-enum DrawCallType { none, filledbox, borderedbox };
-class Vec2 { public: Vec2(float x, float y) { this->x = x; this->y = y; }; float x, y; };
+enum DrawCallType 
+{ 
+	none, 
+	filledbox, 
+	borderedbox,
+	line,
+	text
+};
 
 class DrawCallFilledBox
 {
 public:
-	Vec2 origin;
+	int x, y;
 	int w = 0;
 	int h = 0;
-	D3DCOLOR color;
+	CColor color;
 };
 
 class DrawCallBorderedBox
 {
 public:
-	Vec2 origin;
+	int x, y;
 	int w = 0;
 	int h = 0;
-	D3DCOLOR color;
-	int thickness = 0;
+	CColor color;
+	int border_w = 0;
 };
 
+class DrawCallLine
+{
+public:
+	int x1, y1, x2, y2, line_w;
+	CColor color;
+};
+
+class DrawCallText
+{
+public:
+	int x, y;
+	std::string str;
+	CColor color;
+	LPD3DXFONT font = NULL;
+};
 
 class DrawCall
 {
 public:
 	DrawCall() {}
 	DrawCallType type = none;
-	union
-	{
-		DrawCallFilledBox drawCallFilledBox;
-		DrawCallBorderedBox drawCallBorderedBox;
-	};
-};
-
-struct SD3DVertex
-{
-	float x = 0.f, y = 0.f, z = 0.f, rhw = 0.f;
-	DWORD color = 0;
+	DrawCallFilledBox drawCallFilledBox;
+	DrawCallBorderedBox drawCallBorderedBox;
+	DrawCallLine drawCallLine;
+	DrawCallText drawCallText;
 };
 
 class DXRender : public Singleton<DXRender>
 {
-public:
-	void RenderBorderedBox(Vec2 pos, int w, int h, int thickness, D3DCOLOR color);
-	void RenderFilledBox(Vec2 pos, int w, int h, D3DCOLOR color);
+private:
+	IDirect3DDevice9* pDevice = nullptr;
+	DWORD Color;
+	
 
+	void RenderFilledRect(int x, int y, int w, int h, const CColor& color);
+	void RenderBorderBox(int x, int y, int w, int h, int border_w, const CColor& color);
+	void RenderLine(int x1, int y1, int x2, int y2, int line_w, const CColor& color);
+	void RenderText(int x, int y, const std::string& str, const CColor& color, LPD3DXFONT font = NULL);
+
+public:
 	void Begin();
 	void End();
 
-	void Render(IDirect3DDevice9* device);
+	void Init(IDirect3DDevice9* pDev);
+	DWORD GetDrawColor(CColor color) const;
+	void Render();
+	void CreateDrawFont(int max_size, const char* font, std::vector<LPD3DXFONT>& out);
+
+
+	void DrawFilledRect(int x, int y, int w, int h, CColor color);
+	void DrawBorderBox(int x, int y, int w, int h, int border_w, CColor color);
+	void DrawLine(int x1, int y1, int x2, int y2, int line_w, CColor color);
+	void DrawString(int x, int y, const std::string& str, const CColor& color, LPD3DXFONT font = NULL);
 
 	std::vector<DrawCall> drawCalls;
 	std::vector<DrawCall> safeCalls;
+
+	std::vector<LPD3DXFONT> DefaultFont;
 
 	mutable std::shared_mutex mutex;
 };

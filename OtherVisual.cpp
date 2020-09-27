@@ -18,5 +18,10 @@ void Visual::DrawFovCricle()
 		fov = 180; 
 
 
-	DXDraw::RenderOutlinedCricle(screen.x / 2, screen.y / 2, tan(DEG2RAD(fov) / 2) / tan(DEG2RAD(G::Get().GetOthervars()->GameFOV) / 2) * screen.x, CColor(0, 0, 0), 124);
-} 
+	IMDraw::RenderOutlinedCricle(screen.x / 2, screen.y / 2, tan(DEG2RAD(fov) / 2) / tan(DEG2RAD(G::Get().GetOthervars()->GameFOV) / 2) * screen.x, CColor(0, 0, 0), 124);
+}
+
+void Visual::Test()
+{
+	//DXRender::Get().DrawFilledRect(0, 0, 100, 100, CColor(255, 255, 255));
+}

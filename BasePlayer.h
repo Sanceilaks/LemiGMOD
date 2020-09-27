@@ -14,7 +14,8 @@ public:
 	NETVAR("DT_BasePlayer", "m_fFlags", GetFlags, int);
 	NETVAR("DT_BasePlayer", "m_vecViewOffset[0]", GetViewOffset, Math::CVector);
 	NETVAR("DT_BaseCombatCharacter", "m_hActiveWeapon", ActiveWeaponHandle, uintptr_t);
-
+	NETVAR("DT_BasePlayer", "m_vecMins", GetOBBMin, Math::CVector);
+	NETVAR("DT_BasePlayer", "m_vecMaxs", GetOBBMax, Math::CVector);
 
 	CBaseWeapon* GetActiveWeapon()
 	{
@@ -24,5 +25,14 @@ public:
 	Math::CVector GetEyePosition()
 	{
 		return GetOrigin() + GetViewOffset();
+	}
+
+	inline bool GetName(std::string& name_in)
+	{
+		player_info_t pi;
+		if (!Interfaces::Get().Engine->GetPlayerInfo(this->index(), &pi))
+			return false;
+		name_in = std::string((const char*)pi.name);
+		return true;
 	}
 };

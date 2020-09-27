@@ -8,6 +8,7 @@
 #include "GLOBALS.h"
 #include "Interfaces.h"
 
+#include "LuaLoad.h"
 
 #define ButtonSize ImVec2(80, 30)
 namespace BindButtons
@@ -84,6 +85,13 @@ namespace Menu
 				ImGui::Spacing();
 				ImGui::SliderInt("FOV", &CoreSettings::Get().GetHackSettings()->AIM->AimFov, 0, 360);
 				ImGui::SliderInt("Max distance", &CoreSettings::Get().GetHackSettings()->AIM->MaxAimDistance, 0, 100000);
+				ImGui::Checkbox("Legit", &CoreSettings::Get().GetHackSettings()->AIM->Legit);
+
+				if (CoreSettings::Get().GetHackSettings()->AIM->Legit)
+				{
+					ImGui::SliderInt("Smooth", &CoreSettings::Get().GetHackSettings()->AIM->Smooth, 1, 200);
+				}
+
 				ImGui::Hotkey("AimKey", &CoreSettings::Get().GetHackSettings()->AIM->AimKey);
 				ImGui::Spacing();
 				ImGui::Combo("Aim Type", &CoreSettings::Get().GetHackSettings()->AIM->AimType, AimTypeName, 2);
@@ -95,6 +103,12 @@ namespace Menu
 			static void Draw()
 			{
 				ImGui::BeginGroup();
+
+				if (ImGui::Button("Test"))
+				{
+					LuaLoad::Get().LoadFile("C:\\Test\\test.lua");
+				}
+
 				//ImGui::Checkbox("ESPBox active", &CoreSettings::Get().GetHackSettings()->ESP->IsActive);
 				ImGui::EndGroup();
 			};
